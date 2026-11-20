@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Tierra · Earth Layers — 4º Primaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light mode - warm cream to avoid glare for dyslexia */
+      --bg: #FAF6EE;
+      --surface: #FFFFFF;
+      --surface-soft: #F2ECE1;
+      --surface-tint: #FFF6E0;
+      --text: #1E293B;
+      --text-muted: #526075;
+      --border: #DDD3C2;
+      --primary: #124578;      /* Obradoiro Navy */
+      --primary-light: #E6EFF8;
+      --accent: #EAB308;       /* Obradoiro Gold */
+      --accent-soft: #FEF3C7;
+      --success: #15803D;
+      --success-bg: #DCFCE7;
+      --warn: #B45309;
+      --warn-bg: #FEF3C7;
+      --shadow: 0 4px 14px rgba(18, 69, 120, 0.08);
+      --radius: 18px;
+      --font-main: 'Lexend', 'Atkinson Hyperlegible', Verdana, Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #141B24;
+      --surface: #1E2836;
+      --surface-soft: #263345;
+      --surface-tint: #2C291E;
+      --text: #F1F5F9;
+      --text-muted: #CBD5E1;
+      --border: #384960;
+      --primary: #60A5FA;
+      --primary-light: #1E3A5F;
+      --accent: #FACC15;
+      --accent-soft: #3D3517;
+      --success: #4ADE80;
+      --success-bg: #143D24;
+      --warn: #FBBF24;
+      --warn-bg: #3E2D12;
+      --shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      letter-spacing: 0.025em;
+      word-spacing: 0.08em;
+      transition: background-color 0.25s, color 0.25s;
+      padding-bottom: 60px;
+    }
+
+    body.large-text { font-size: 1.15rem; }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.12s ease, background-color 0.2s, box-shadow 0.2s;
+    }
+    button:active { transform: scale(0.97); }
+    button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* Header */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow);
+    }
+    .topbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo { width: 44px; height: 50px; flex-shrink: 0; }
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .ctrl-btn {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 38px;
+    }
+    .ctrl-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+    [data-theme="dark"] .ctrl-btn.active { color: #0F172A; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .tab-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 10px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .tab-btn span.tab-icon { font-size: 1.5rem; }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+    [data-theme="dark"] .tab-btn.active { color: #0F172A; }
+
+    /* Block Filter & Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+    .block-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      min-height: 38px;
+    }
+    .pill.active {
+      background: var(--accent);
+      color: #1E293B;
+      border-color: #CA8A04;
+    }
+
+    /* Big Idea Banner */
+    .big-picture {
+      background: var(--primary-light);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Vocab Grid & Focus View */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .vocab-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .vocab-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .svg-box {
+      width: 82px;
+      height: 82px;
+      flex-shrink: 0;
+      background: var(--surface-soft);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+    .svg-box svg { width: 100%; height: 100%; }
+    .word-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+    .word-trans {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .def-text {
+      font-size: 1rem;
+      margin: 4px 0;
+    }
+    .think-box {
+      background: var(--surface-tint);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 0.92rem;
+    }
+    .speak-btn {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+    }
+
+    /* Focus Mode (1 card at a time) */
+    .focus-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .focus-card {
+      padding: 24px;
+      text-align: center;
+      align-items: center;
+    }
+    .focus-card .svg-box {
+      width: 150px;
+      height: 150px;
+    }
+    .focus-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      gap: 10px;
+    }
+    .nav-btn {
+      background: var(--primary);
+      color: #FFF;
+      border-radius: 14px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: 700;
+      min-width: 115px;
+    }
+    [data-theme="dark"] .nav-btn { color: #0F172A; }
+    .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* TAB 2: Flashcards (Oral Practice) */
+    .flash-stage {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .flash-stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .flashcard {
+      background: var(--surface);
+      border: 3px solid var(--primary);
+      border-radius: 24px;
+      padding: 26px 22px;
+      min-height: 350px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+      position: relative;
+    }
+    .flashcard .svg-box {
+      width: 160px;
+      height: 160px;
+    }
+    .big-action-btn {
+      background: var(--primary);
+      color: #FFF;
+      border-radius: 14px;
+      padding: 14px 24px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    [data-theme="dark"] .big-action-btn { color: #0F172A; }
+    .secondary-btn {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 11px 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .eval-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .btn-knew {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 2px solid var(--success);
+      border-radius: 14px;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .btn-review {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 2px solid var(--warn);
+      border-radius: 14px;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* TAB 3: Exercises */
+    .ex-progress-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+      background: var(--surface);
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+    }
+    .ex-step {
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .ex-step.current {
+      background: var(--primary);
+      color: #FFF;
+      border-color: var(--primary);
+    }
+    [data-theme="dark"] .ex-step.current { color: #0F172A; }
+    .ex-step.done {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: var(--success);
+    }
+
+    .ex-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .ex-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .ex-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin: 0; }
+
+    /* Feedback & Scaffolding Box */
+    .feedback-box {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 600;
+      display: none;
+    }
+    .feedback-box.show { display: block; animation: popIn 0.25s ease; }
+    .feedback-box.ok { background: var(--success-bg); color: var(--success); border: 2px solid var(--success); }
+    .feedback-box.hint { background: var(--warn-bg); color: var(--warn); border: 2px solid var(--warn); }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gentleShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    .shake { animation: gentleShake 0.3s ease; }
+
+    /* Word Chips & Blanks */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+      padding: 12px;
+      background: var(--surface-soft);
+      border-radius: 14px;
+    }
+    .chip {
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--primary);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+    .chip.selected {
+      background: var(--accent);
+      color: #1E293B;
+      border-color: #CA8A04;
+      transform: scale(1.04);
+    }
+    .chip.used { opacity: 0.35; text-decoration: line-through; pointer-events: none; }
+
+    .blank-slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 135px;
+      min-height: 38px;
+      padding: 4px 12px;
+      margin: 2px 4px;
+      border: 2.5px dashed var(--primary);
+      border-radius: 10px;
+      background: var(--surface-soft);
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    .blank-slot.active-slot { border-style: solid; background: var(--accent-soft); }
+    .blank-slot.correct { border-style: solid; border-color: var(--success); background: var(--success-bg); color: var(--success); }
+
+    .sentence-row {
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      font-size: 1.02rem;
+    }
+
+    /* Diagram Exercise Layout */
+    .diagram-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .diagram-svg {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: block;
+    }
+    .num-list-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .num-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #FFF;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .num-badge { color: #0F172A; }
+
+    /* Matching Exercise */
+    .match-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 14px;
+    }
+    .match-col { display: flex; flex-direction: column; gap: 10px; }
+    .match-item {
+      background: var(--surface-soft);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      font-size: 0.95rem;
+      min-height: 70px;
+      color: var(--text);
+    }
+    .match-item.selected { border-color: var(--accent); background: var(--accent-soft); }
+    .match-item.matched { border-color: var(--success); background: var(--success-bg); color: var(--success); opacity: 0.85; pointer-events: none; }
+
+    /* Option buttons (MC / TF / Plates) */
+    .choice-row {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .choice-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .opt-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .opt-btn.correct { background: var(--success-bg); color: var(--success); border-color: var(--success); }
+
+    /* Group Sorting */
+    .sort-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .sort-box {
+      background: var(--bg);
+      border: 2px dashed var(--primary);
+      border-radius: 16px;
+      padding: 12px;
+      min-height: 160px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .sort-box h4 { margin: 6px 0 10px; color: var(--primary); }
+    .sorted-pill {
+      display: inline-block;
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1.5px solid var(--success);
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin: 4px;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 720px) {
+      .tabs { grid-template-columns: 1fr; }
+      .tab-btn { flex-direction: row; justify-content: flex-start; padding: 12px 16px; gap: 10px; }
+      .diagram-layout { grid-template-columns: 1fr; }
+      .match-grid { grid-template-columns: 1fr; }
+      .sort-cols { grid-template-columns: 1fr; }
+      .topbar-inner { justify-content: center; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <!-- Obradoiro International School emblem SVG -->
+      <svg class="brand-logo" viewBox="0 0 100 112" aria-label="Obradoiro International School">
+        <path d="M50 4 L94 22 L86 78 L50 108 L14 78 L6 22 Z" fill="#FFFFFF" stroke="#124578" stroke-width="5"/>
+        <text x="50" y="30" text-anchor="middle" font-family="Verdana, sans-serif" font-weight="900" font-size="11.5" fill="#F2D024">OBRADOIRO</text>
+        <circle cx="50" cy="40" r="6.5" fill="#124578"/>
+        <path d="M35 50 H65 V55 H54 V66 H62 V79 H54 V86 H59 V90 H41 V86 H46 V79 H38 V66 H46 V55 H35 Z" fill="#124578"/>
+        <rect x="41" y="69" width="6" height="7" fill="#FFFFFF"/>
+        <rect x="53" y="69" width="6" height="7" fill="#FFFFFF"/>
+        <rect x="48.5" y="55" width="3" height="28" fill="#FFFFFF"/>
+        <text x="50" y="100" text-anchor="middle" font-family="Verdana, sans-serif" font-weight="700" font-size="6.2" fill="#124578">INTERNATIONAL SCHOOL</text>
+      </svg>
+      <div>
+        <div class="brand-title" id="ui-app-title">La Tierra, Placas y Volcanes</div>
+        <div class="brand-sub" id="ui-app-sub">4º Primaria · Estudio visual adaptado</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btn-lang" onclick="toggleLang()">🌐 <span>ES</span></button>
+      <button class="ctrl-btn active" id="btn-sound" onclick="toggleSound()">🔊 <span id="lbl-sound">Sonido ON</span></button>
+      <button class="ctrl-btn" id="btn-theme" onclick="toggleTheme()">☀️ <span id="lbl-theme">Luz clara</span></button>
+      <button class="ctrl-btn" id="btn-textsize" onclick="toggleTextSize()">Aa+</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Main Navigation Tabs -->
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" id="tab-learn" onclick="switchTab('learn')">
+      <span class="tab-icon">📖</span>
+      <span id="lbl-tab-learn">1. Aprender y Memorizar</span>
+    </button>
+    <button class="tab-btn" id="tab-oral" onclick="switchTab('oral')">
+      <span class="tab-icon">🗣️</span>
+      <span id="lbl-tab-oral">2. Definir Oralmente</span>
+    </button>
+    <button class="tab-btn" id="tab-ex" onclick="switchTab('ex')">
+      <span class="tab-icon">✏️</span>
+      <span id="lbl-tab-ex">3. Ejercicios Prácticos</span>
+    </button>
+  </nav>
+
+  <!-- Block Selector (Shown on Tab 1 & Tab 2) -->
+  <section class="toolbar" id="block-toolbar">
+    <div class="block-pills" id="block-pills"></div>
+    <div id="learn-view-toggle">
+      <button class="ctrl-btn" id="btn-focus-mode" onclick="toggleFocusMode()">🎯 <span id="lbl-focus">Modo Enfoque (1 a 1)</span></button>
+    </div>
+  </section>
+
+  <!-- TAB 1: LEARN & MEMORIZE -->
+  <section id="panel-learn">
+    <div class="big-picture" id="big-picture-box"></div>
+    <div id="learn-content"></div>
+  </section>
+
+  <!-- TAB 2: ORAL FLIP CARDS -->
+  <section id="panel-oral" class="hidden">
+    <div class="flash-stage">
+      <div class="flash-stats">
+        <span id="flash-counter">Tarjeta 1 / 32</span>
+        <span>⭐ <span id="lbl-mastered">Dominadas:</span> <strong id="flash-mastered-count">0</strong></span>
+        <button class="ctrl-btn" onclick="resetFlashcards()">🔄 <span id="lbl-reset-cards">Reiniciar mazo</span></button>
+      </div>
+      <div class="flashcard" id="flashcard-box"></div>
+      <div class="focus-nav">
+        <button class="nav-btn" id="flash-prev" onclick="moveFlash(-1)">⬅️ <span id="lbl-prev1">Anterior</span></button>
+        <button class="nav-btn" id="flash-next" onclick="moveFlash(1)"><span id="lbl-next1">Siguiente</span> ➡️</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: EXERCISES -->
+  <section id="panel-ex" class="hidden">
+    <div class="ex-progress-bar" id="ex-steps"></div>
+    <div class="ex-card" id="ex-stage"></div>
+  </section>
+</main>
+
+<script>
+/* =========================================================
+   STATE & SETTINGS
+   ========================================================= */
+let lang = 'es'; // 'es' | 'en'
+let soundOn = true;
+let darkMode = false;
+let activeTab = 'learn';
+let activeBlock = 0; // 0 = all, 1..4 = specific block
+let focusMode = false;
+let focusIdx = 0;
+
+// Flashcards state
+let flashDeck = [];
+let flashIdx = 0;
+let flashFlipped = false;
+let flashPeekWord = false;
+let masteredIds = new Set();
+
+// Exercises state
+let currentExIdx = 0;
+let completedEx = new Set(JSON.parse(localStorage.getItem('earth_done_ex') || '[]'));
+
+/* =========================================================
+   UI TRANSLATIONS
+   ========================================================= */
+const UI = {
+  es: {
+    appTitle: 'La Tierra, Placas y Volcanes',
+    appSub: '4º Primaria · Estudio visual adaptado',
+    soundOn: 'Sonido ON',
+    soundOff: 'Sonido OFF',
+    light: 'Luz clara',
+    dark: 'Luz oscura',
+    tabLearn: '1. Aprender y Memorizar',
+    tabOral: '2. Definir Oralmente',
+    tabEx: '3. Ejercicios Prácticos',
+    allBlocks: 'Todos (32)',
+    blocks: {
+      1: '1. Esferas y capas',
+      2: '2. Volcanes',
+      3: '3. Tectónica de placas',
+      4: '4. Planeta y nosotros'
+    },
+    focusOn: 'Ver todos',
+    focusOff: 'Modo Enfoque (1 a 1)',
+    listen: 'Escuchar',
+    think: 'Piensa:',
+    inOther: 'En inglés:',
+    prev: 'Anterior',
+    next: 'Siguiente',
+    card: 'Tarjeta',
+    of: 'de',
+    mastered: 'Dominadas:',
+    resetCards: 'Reiniciar mazo',
+    oralPrompt: 'Mira el dibujo y explícalo en voz alta con tus palabras.',
+    peekWord: '👀 Ver palabra',
+    flipCard: '🔄 Voltear tarjeta',
+    flipBack: '🖼️ Ver solo dibujo',
+    knewIt: '✅ ¡Lo sabía!',
+    reviewLater: '🔄 Repasar luego',
+    deckFinished: '🎉 ¡Genial! Has repasado todas las tarjetas de este bloque.',
+    bigIdeas: {
+      0: '💡 <strong>Idea central:</strong> Nuestro planeta está hecho de distintos tipos de materia. Elige un bloque arriba para estudiar poco a poco.',
+      1: '🍑 <strong>La imagen completa:</strong> La Tierra es como un melocotón: piel fina (<strong>corteza</strong>), mucha fruta (<strong>manto</strong>) y un hueso duro en el centro (<strong>núcleo</strong>).',
+      2: '🌋 <strong>Recuerda:</strong> El <strong>magma</strong> está <strong>debajo</strong> de la tierra. Cuando sale <strong>fuera</strong>, se llama <strong>lava</strong>.',
+      3: '🧩 <strong>Recuerda:</strong> La capa exterior de la Tierra es como un <strong>puzle</strong>. Las piezas (placas) se mueven de tres maneras.',
+      4: '🌍 <strong>Nuestro planeta:</strong> Lo que hacemos con los recursos naturales tiene repercusiones en el medio ambiente.'
+    },
+    hintBtn: '💡 Dame una pista',
+    checkBtn: '✔️ Comprobar',
+    nextExBtn: 'Siguiente ejercicio ➡️',
+    retryHint: '¡Casi! Fíjate en esta pista para avanzar:',
+    allCorrect: '🌟 ¡Fantástico! Lo has completado muy bien.',
+    tapSlotFirst: '👆 Toca primero un recuadro vacío (o una palabra del banco) para colocarla.',
+    selectGroupHint: '👆 Toca primero una palabra de arriba y luego la caja donde va.'
+  },
+  en: {
+    appTitle: 'Earth Layers, Plates & Volcanoes',
+    appSub: 'Grade 4 · Adapted visual study',
+    soundOn: 'Sound ON',
+    soundOff: 'Sound OFF',
+    light: 'Light mode',
+    dark: 'Dark mode',
+    tabLearn: '1. Learn & Memorize',
+    tabOral: '2. Oral Practice',
+    tabEx: '3. Practice Exercises',
+    allBlocks: 'All (32)',
+    blocks: {
+      1: '1. Spheres & layers',
+      2: '2. Volcanoes',
+      3: '3. Plate tectonics',
+      4: '4. Planet & us'
+    },
+    focusOn: 'Show grid',
+    focusOff: 'Focus Mode (1 by 1)',
+    listen: 'Listen',
+    think: 'Think:',
+    inOther: 'In Spanish:',
+    prev: 'Previous',
+    next: 'Next',
+    card: 'Card',
+    of: 'of',
+    mastered: 'Mastered:',
+    resetCards: 'Reset deck',
+    oralPrompt: 'Look at the picture and explain it out loud in your own words.',
+    peekWord: '👀 Peek word',
+    flipCard: '🔄 Flip card',
+    flipBack: '🖼️ Picture only',
+    knewIt: '✅ I knew it!',
+    reviewLater: '🔄 Review later',
+    deckFinished: '🎉 Awesome! You reviewed all cards in this block.',
+    bigIdeas: {
+      0: '💡 <strong>Big idea:</strong> Our planet is made of different types of matter. Choose a block above to study step by step.',
+      1: '🍑 <strong>The big picture:</strong> Earth is like a peach — thin skin (<strong>crust</strong>), thick fruit (<strong>mantle</strong>) and a hard stone in the middle (<strong>core</strong>).',
+      2: '🌋 <strong>Remember:</strong> <strong>Magma</strong> is <strong>under</strong> the ground. When it comes <strong>out</strong>, it is called <strong>lava</strong>.',
+      3: '🧩 <strong>Remember:</strong> Earth’s outer layer is like a <strong>puzzle</strong>. The pieces (plates) move in three ways.',
+      4: '🌍 <strong>Our planet:</strong> What people do with natural resources has repercussions on the environment.'
+    },
+    hintBtn: '💡 Give me a hint',
+    checkBtn: '✔️ Check',
+    nextExBtn: 'Next exercise ➡️',
+    retryHint: 'Almost! Use this hint to keep going:',
+    allCorrect: '🌟 Fantastic! You did a great job.',
+    tapSlotFirst: '👆 Tap an empty box first (or a word chip) to place it.',
+    selectGroupHint: '👆 First tap a word above, then tap the box where it belongs.'
+  }
+};
+
+/* =========================================================
+   INLINE SVG ILLUSTRATIONS FOR ALL 32 TERMS
+   ========================================================= */
+const SVGS = {
+  atmosphere: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#DCEEFB" stroke="#1E293B" stroke-width="3" stroke-dasharray="6 4"/><circle cx="50" cy="50" r="24" fill="#60A5FA" stroke="#1E293B" stroke-width="2.5"/><ellipse cx="42" cy="44" rx="7" ry="10" fill="#4ADE80" stroke="#1E293B" stroke-width="2"/><ellipse cx="60" cy="57" rx="6" ry="5" fill="#4ADE80" stroke="#1E293B" stroke-width="2"/><circle cx="80" cy="20" r="9" fill="#FACC15" stroke="#1E293B" stroke-width="2.5"/></svg>`,
+  geosphere: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="#8D5524" stroke="#1E293B" stroke-width="3"/><circle cx="50" cy="50" r="30" fill="#EA7B34" stroke="#1E293B" stroke-width="2.5"/><circle cx="50" cy="50" r="16" fill="#F4A261" stroke="#1E293B" stroke-width="2.5"/><circle cx="50" cy="50" r="8" fill="#FACC15" stroke="#1E293B" stroke-width="2"/><path d="M50 50 L50 10 A40 40 0 0 1 90 50 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="3" stroke-dasharray="5 4"/></svg>`,
+  hydrosphere: `<svg viewBox="0 0 100 100"><rect x="10" y="52" width="80" height="36" rx="8" fill="#60A5FA" stroke="#1E293B" stroke-width="3"/><path d="M18 68 Q30 60 42 68 T66 68 T84 68" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/><path d="M50 14 C65 36 68 48 50 54 C32 48 35 36 50 14 Z" fill="#93C5FD" stroke="#1E293B" stroke-width="3"/></svg>`,
+  layer: `<svg viewBox="0 0 100 100"><rect x="16" y="22" width="52" height="18" fill="#F472B6" stroke="#1E293B" stroke-width="3"/><rect x="16" y="40" width="52" height="18" fill="#FACC15" stroke="#1E293B" stroke-width="3"/><rect x="16" y="58" width="52" height="18" fill="#78350F" stroke="#1E293B" stroke-width="3"/><path d="M88 49 H72 M72 49 L78 43 M72 49 L78 55" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  crust: `<svg viewBox="0 0 100 100"><circle cx="48" cy="52" r="36" fill="#8D5524" stroke="#1E293B" stroke-width="3"/><circle cx="48" cy="52" r="28" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/><circle cx="48" cy="52" r="16" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/><path d="M84 16 L70 30 M70 30 L78 30 M70 30 L70 22" stroke="#C2410C" stroke-width="4" stroke-linecap="round"/></svg>`,
+  mantle: `<svg viewBox="0 0 100 100"><circle cx="48" cy="52" r="36" fill="#E2E8F0" stroke="#1E293B" stroke-width="3"/><circle cx="48" cy="52" r="28" fill="#FB923C" stroke="#1E293B" stroke-width="2.5"/><circle cx="48" cy="52" r="14" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/><path d="M84 16 L63 37 M63 37 L71 37 M63 37 L63 29" stroke="#C2410C" stroke-width="4" stroke-linecap="round"/></svg>`,
+  core: `<svg viewBox="0 0 100 100"><circle cx="48" cy="52" r="36" fill="#E2E8F0" stroke="#1E293B" stroke-width="3"/><circle cx="48" cy="52" r="26" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/><circle cx="48" cy="52" r="16" fill="#F97316" stroke="#1E293B" stroke-width="2.5"/><circle cx="48" cy="52" r="8" fill="#FACC15" stroke="#1E293B" stroke-width="2"/><path d="M84 16 L54 46 M54 46 L62 46 M54 46 L54 38" stroke="#C2410C" stroke-width="4" stroke-linecap="round"/></svg>`,
+  centre: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="#F8FAFC" stroke="#1E293B" stroke-width="3"/><circle cx="50" cy="50" r="9" fill="#EF4444" stroke="#1E293B" stroke-width="2.5"/><path d="M22 22 L38 38 M78 22 L62 38 M22 78 L38 62 M78 78 L62 62" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  surface: `<svg viewBox="0 0 100 100"><rect x="14" y="54" width="72" height="32" fill="#8D5524" stroke="#1E293B" stroke-width="3"/><line x1="14" y1="54" x2="86" y2="54" stroke="#DC2626" stroke-width="5"/><line x1="28" y1="54" x2="28" y2="38" stroke="#1E293B" stroke-width="3"/><circle cx="28" cy="30" r="9" fill="#4ADE80" stroke="#1E293B" stroke-width="2.5"/><polygon points="44,54 52,40 60,54" fill="#4ADE80" stroke="#1E293B" stroke-width="2.5"/><path d="M72 22 V46 M72 46 L66 39 M72 46 L78 39" stroke="#B45309" stroke-width="4" stroke-linecap="round"/></svg>`,
+  thinnest: `<svg viewBox="0 0 100 100"><rect x="16" y="20" width="50" height="7" fill="#EF4444" stroke="#1E293B" stroke-width="2.5"/><rect x="16" y="34" width="50" height="16" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/><rect x="16" y="58" width="50" height="24" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/><path d="M88 23 H72 M72 23 L78 18 M72 23 L78 28" stroke="#DC2626" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  thickest: `<svg viewBox="0 0 100 100"><rect x="16" y="18" width="50" height="7" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/><rect x="16" y="32" width="50" height="16" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/><rect x="16" y="56" width="50" height="26" fill="#EF4444" stroke="#1E293B" stroke-width="2.5"/><path d="M88 69 H72 M72 69 L78 64 M72 69 L78 74" stroke="#DC2626" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  volcano: `<svg viewBox="0 0 100 100"><polygon points="15,86 38,38 62,38 85,86" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/><path d="M40 38 L45 48 L50 41 L55 48 L60 38 Z" fill="#DC2626" stroke="#1E293B" stroke-width="2"/><circle cx="42" cy="24" r="9" fill="#64748B" stroke="#1E293B" stroke-width="2.5"/><circle cx="56" cy="20" r="11" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/></svg>`,
+  landform: `<svg viewBox="0 0 100 100"><polygon points="10,82 36,34 62,82" fill="#4ADE80" stroke="#1E293B" stroke-width="3"/><polygon points="44,82 64,46 86,82" fill="#22C55E" stroke="#1E293B" stroke-width="3"/><circle cx="76" cy="24" r="10" fill="#FACC15" stroke="#1E293B" stroke-width="2.5"/></svg>`,
+  magma: `<svg viewBox="0 0 100 100"><rect x="12" y="56" width="76" height="32" fill="#8D5524" stroke="#1E293B" stroke-width="3"/><polygon points="22,56 38,20 62,20 78,56" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/><rect x="44" y="20" width="12" height="48" fill="#FDBA74" stroke="#1E293B" stroke-width="2.5"/><ellipse cx="50" cy="72" rx="22" ry="11" fill="#FB923C" stroke="#1E293B" stroke-width="2.5"/><path d="M84 86 L68 76" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  crater: `<svg viewBox="0 0 100 100"><polygon points="15,86 38,38 62,38 85,86" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/><ellipse cx="50" cy="38" rx="12" ry="5" fill="#1E293B"/><circle cx="50" cy="38" r="19" fill="none" stroke="#EA580C" stroke-width="3.5" stroke-dasharray="5 4"/></svg>`,
+  eruption: `<svg viewBox="0 0 100 100"><polygon points="18,86 38,44 62,44 82,86" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/><path d="M40 44 L46 53 L50 47 L54 53 L60 44 Z" fill="#DC2626"/><path d="M50 38 V16 M42 38 Q32 24 38 14 M58 38 Q68 24 62 14" stroke="#EF4444" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="24" cy="24" r="4" fill="#1E293B"/><circle cx="76" cy="24" r="4" fill="#1E293B"/></svg>`,
+  lava: `<svg viewBox="0 0 100 100"><polygon points="14,86 38,36 62,36 86,86" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/><path d="M40 36 L60 36 L76 86 L62 86 L52 54 L44 45 Z" fill="#EF4444" stroke="#1E293B" stroke-width="2.5"/><path d="M86 32 L68 48 M68 48 L76 48 M68 48 L68 40" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  ash: `<svg viewBox="0 0 100 100"><path d="M28 52 H72 A14 14 0 0 0 70 24 A18 18 0 0 0 36 22 A14 14 0 0 0 28 52 Z" fill="#64748B" stroke="#1E293B" stroke-width="3"/><circle cx="32" cy="64" r="2.5" fill="#1E293B"/><circle cx="48" cy="68" r="2.5" fill="#1E293B"/><circle cx="64" cy="63" r="2.5" fill="#1E293B"/><circle cx="40" cy="78" r="2.5" fill="#1E293B"/><circle cx="56" cy="80" r="2.5" fill="#1E293B"/><circle cx="70" cy="76" r="2.5" fill="#1E293B"/></svg>`,
+  eject: `<svg viewBox="0 0 100 100"><rect x="24" y="54" width="52" height="32" rx="10" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/><rect x="30" y="20" width="16" height="22" rx="3" fill="#F59E0B" stroke="#1E293B" stroke-width="2.5"/><rect x="54" y="16" width="16" height="22" rx="3" fill="#F59E0B" stroke="#1E293B" stroke-width="2.5"/><path d="M16 42 V22 M16 22 L11 28 M16 22 L21 28 M84 42 V22 M84 22 L79 28 M84 22 L89 28" stroke="#EA580C" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  rise: `<svg viewBox="0 0 100 100"><path d="M50 14 C68 14 70 42 56 56 H44 C30 42 32 14 50 14 Z" fill="#EF4444" stroke="#1E293B" stroke-width="3"/><rect x="44" y="66" width="12" height="12" fill="#B45309" stroke="#1E293B" stroke-width="2.5"/><line x1="46" y1="56" x2="46" y2="66" stroke="#1E293B" stroke-width="2"/><line x1="54" y1="56" x2="54" y2="66" stroke="#1E293B" stroke-width="2"/><path d="M18 76 V28 M18 28 L13 35 M18 28 L23 35 M82 76 V28 M82 28 L77 35 M82 28 L87 35" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  plate_tectonics: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#60A5FA" stroke="#1E293B" stroke-width="3"/><path d="M24 38 Q36 30 48 42 Q38 56 26 48 Z" fill="#4ADE80" stroke="#1E293B" stroke-width="2"/><path d="M58 42 Q72 34 78 52 Q64 62 56 50 Z" fill="#4ADE80" stroke="#1E293B" stroke-width="2"/><path d="M18 62 Q48 46 82 64 M48 16 Q56 50 42 84" fill="none" stroke="#EF4444" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  tectonic_plate: `<svg viewBox="0 0 100 100"><path d="M20 24 H78 V44 A7 7 0 0 0 78 58 V78 H20 V58 A7 7 0 0 0 20 44 Z" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><polygon points="28,54 38,38 48,54" fill="#4ADE80" stroke="#1E293B" stroke-width="2"/><polygon points="52,58 60,46 68,58" fill="#4ADE80" stroke="#1E293B" stroke-width="2"/></svg>`,
+  outer_layer: `<svg viewBox="0 0 100 100"><circle cx="48" cy="52" r="35" fill="#FDBA74" stroke="#EA580C" stroke-width="5"/><circle cx="48" cy="52" r="27" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/><path d="M48 25 V79 M21 52 H75 M29 33 L67 71 M67 33 L29 71" stroke="#F59E0B" stroke-width="2"/><path d="M86 16 L72 30 M72 30 L80 30 M72 30 L72 22" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  boundary: `<svg viewBox="0 0 100 100"><rect x="14" y="42" width="36" height="34" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><rect x="50" y="42" width="36" height="34" fill="#D97706" stroke="#1E293B" stroke-width="3"/><line x1="50" y1="36" x2="50" y2="82" stroke="#EF4444" stroke-width="4" stroke-dasharray="5 4"/><path d="M50 14 V32 M50 32 L44 25 M50 32 L56 25" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  move_slowly: `<svg viewBox="0 0 100 100"><rect x="14" y="66" width="72" height="18" fill="#8D5524" stroke="#1E293B" stroke-width="3"/><path d="M26 66 Q44 50 64 60 Q72 50 76 58 Q68 66 26 66 Z" fill="#FDE68A" stroke="#1E293B" stroke-width="2.5"/><circle cx="46" cy="54" r="13" fill="#B47B44" stroke="#1E293B" stroke-width="2.5"/><path d="M46 54 A5 5 0 1 1 51 50" fill="none" stroke="#1E293B" stroke-width="2.5"/><path d="M16 32 H40 M40 32 L33 27 M40 32 L33 37" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  ocean_trench: `<svg viewBox="0 0 100 100"><rect x="14" y="20" width="72" height="24" fill="#60A5FA" stroke="#1E293B" stroke-width="3"/><rect x="14" y="44" width="72" height="40" fill="#8D5524" stroke="#1E293B" stroke-width="3"/><polygon points="36,44 64,44 50,82" fill="#93C5FD" stroke="#1E293B" stroke-width="3"/></svg>`,
+  push_together: `<svg viewBox="0 0 100 100"><rect x="12" y="52" width="36" height="28" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><rect x="52" y="52" width="36" height="28" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><polygon points="38,52 50,30 62,52" fill="#4ADE80" stroke="#1E293B" stroke-width="3"/><path d="M14 26 H34 M34 26 L28 21 M34 26 L28 31 M86 26 H66 M66 26 L72 21 M66 26 L72 31" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  push_apart: `<svg viewBox="0 0 100 100"><rect x="12" y="52" width="30" height="28" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><rect x="58" y="52" width="30" height="28" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><path d="M42 54 Q50 42 58 54 V80 H42 Z" fill="#EF4444" stroke="#1E293B" stroke-width="2.5"/><path d="M36 26 H16 M16 26 L22 21 M16 26 L22 31 M64 26 H84 M84 26 L78 21 M84 26 L78 31" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  slide_past: `<svg viewBox="0 0 100 100"><rect x="20" y="20" width="26" height="62" fill="#B47B44" stroke="#1E293B" stroke-width="3"/><rect x="54" y="14" width="26" height="62" fill="#D97706" stroke="#1E293B" stroke-width="3"/><path d="M33 70 V32 M33 32 L28 39 M33 32 L38 39" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/><path d="M67 26 V64 M67 64 L62 57 M67 64 L72 57" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  repercussions: `<svg viewBox="0 0 100 100"><rect x="18" y="42" width="12" height="38" transform="rotate(-30 24 80)" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/><rect x="42" y="42" width="12" height="38" transform="rotate(-12 48 80)" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/><rect x="66" y="42" width="12" height="38" fill="#E2E8F0" stroke="#1E293B" stroke-width="2.5"/><path d="M12 24 L28 32" stroke="#EF4444" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  natural_resources: `<svg viewBox="0 0 100 100"><line x1="28" y1="80" x2="28" y2="54" stroke="#1E293B" stroke-width="4"/><circle cx="28" cy="44" r="14" fill="#4ADE80" stroke="#1E293B" stroke-width="3"/><path d="M60 18 C72 34 72 44 60 48 C48 44 48 34 60 18 Z" fill="#60A5FA" stroke="#1E293B" stroke-width="2.5"/><polygon points="48,80 56,60 76,60 84,80" fill="#94A3B8" stroke="#1E293B" stroke-width="3"/></svg>`,
+  mineral: `<svg viewBox="0 0 100 100"><rect x="18" y="76" width="64" height="10" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/><polygon points="24,76 32,34 42,76" fill="#60A5FA" stroke="#1E293B" stroke-width="2.5"/><polygon points="40,76 50,18 62,76" fill="#4ADE80" stroke="#1E293B" stroke-width="2.5"/><polygon points="58,76 68,36 76,76" fill="#A855F7" stroke="#1E293B" stroke-width="2.5"/></svg>`
+};
+
+/* =========================================================
+   32 VOCABULARY ITEMS (EXACT MATCH TO BOTH PDFs)
+   ========================================================= */
+const VOCAB = [
+  // BLOCK 1
+  { id:'atmosphere', block:1, svg:SVGS.atmosphere,
+    es:{ word:'Atmósfera', def:'La capa de <strong>aire</strong> que rodea la Tierra. <strong>Protege</strong> a los seres vivos del calor del Sol.', think:'una manta de aire alrededor de la Tierra', hint:'Rodea todo el planeta y tiene aire para respirar.' },
+    en:{ word:'Atmosphere', def:'The layer of <strong>air</strong> around Earth. It <strong>protects</strong> living things from the heat of the Sun.', think:'a blanket of air around Earth', hint:'It surrounds the whole planet and is made of air.' } },
+  { id:'geosphere', block:1, svg:SVGS.geosphere,
+    es:{ word:'Geosfera', def:'La parte de <strong>rocas</strong> de la Tierra, desde el <strong>centro</strong> hasta la <strong>superficie</strong>.', think:'geo = Tierra (rocas)', hint:'Es toda la parte sólida y rocosa: corteza, manto y núcleo.' },
+    en:{ word:'Geosphere', def:'The <strong>rocky</strong> part of Earth, from the <strong>centre</strong> to the <strong>surface</strong>.', think:'geo = Earth (rocks)', hint:'It is all the rocky part: crust, mantle, and core.' } },
+  { id:'hydrosphere', block:1, svg:SVGS.hydrosphere,
+    es:{ word:'Hidrosfera', def:'El <strong>agua</strong> de la corteza terrestre: océanos, mares, ríos y lagos.', think:'hidro = agua', hint:'Hidro significa agua (mares, ríos, lagos).' },
+    en:{ word:'Hydrosphere', def:'The <strong>water</strong> on Earth’s crust: oceans, seas, rivers and lakes.', think:'hydro = water', hint:'Hydro means water (oceans, rivers, lakes).' } },
+  { id:'layer', block:1, svg:SVGS.layer,
+    es:{ word:'Capa', def:'<strong>Una parte</strong> o <strong>nivel</strong> de algo.', think:'un piso de una tarta', hint:'Como los pisos de una tarta uno encima de otro.' },
+    en:{ word:'Layer', def:'<strong>One part</strong> or <strong>level</strong> of something.', think:'a layer of a cake', hint:'Like levels of a cake stacked together.' } },
+  { id:'crust', block:1, svg:SVGS.crust,
+    es:{ word:'Corteza', def:'La capa <strong>exterior</strong> de la geosfera. Es la capa <strong>más fina</strong>.', think:'la piel de un melocotón', hint:'Es la capa de fuera donde caminamos, la más fina.' },
+    en:{ word:'Crust', def:'The <strong>outer</strong> layer of the geosphere. It is the <strong>thinnest</strong> layer.', think:'the skin of a peach', hint:'It is the outside layer, the thinnest one.' } },
+  { id:'mantle', block:1, svg:SVGS.mantle,
+    es:{ word:'Manto', def:'La capa <strong>más gruesa</strong> de la geosfera. Está <strong>debajo</strong> de la corteza.', think:'la fruta del melocotón', hint:'Está debajo de la corteza y es la capa más gruesa.' },
+    en:{ word:'Mantle', def:'The <strong>thickest</strong> layer of the geosphere. It is <strong>under</strong> the crust.', think:'the fruit of a peach', hint:'It is under the crust and is the thickest layer.' } },
+  { id:'core', block:1, svg:SVGS.core,
+    es:{ word:'Núcleo', def:'La parte <strong>más caliente</strong> de la geosfera. Está en el <strong>centro</strong> de la Tierra.', think:'el hueso del melocotón (¡muy caliente!)', hint:'Está justo en el centro y es la parte más caliente.' },
+    en:{ word:'Core', def:'The <strong>hottest</strong> part of the geosphere. It is at the <strong>centre</strong> of Earth.', think:'the stone of a peach (very hot!)', hint:'It is right in the centre and is the hottest part.' } },
+  { id:'centre', block:1, svg:SVGS.centre,
+    es:{ word:'Centro', def:'La parte del <strong>medio</strong> o más interior de algo.', think:'el punto del medio', hint:'Justo el punto del medio.' },
+    en:{ word:'Centre', def:'The <strong>middle</strong> or innermost part of something.', think:'the dot in the middle', hint:'Right in the middle.' } },
+  { id:'surface', block:1, svg:SVGS.surface,
+    es:{ word:'Superficie', def:'La parte de <strong>fuera</strong> o de <strong>arriba</strong> de algo.', think:'donde caminamos', hint:'Es la parte superior donde están los árboles y caminamos.' },
+    en:{ word:'Surface', def:'The <strong>outside</strong> or <strong>top</strong> part of something.', think:'where we walk', hint:'The top outside part where we walk.' } },
+  { id:'thinnest', block:1, svg:SVGS.thinnest,
+    es:{ word:'La más fina', def:'La capa con el <strong>menor</strong> grosor.', think:'fina → más fina → la más fina', hint:'Tiene el grosor más pequeño, como la piel del melocotón.' },
+    en:{ word:'Thinnest', def:'The layer with the <strong>smallest</strong> thickness.', think:'thin → thinner → thinnest', hint:'Smallest thickness, like the skin of a peach.' } },
+  { id:'thickest', block:1, svg:SVGS.thickest,
+    es:{ word:'La más gruesa', def:'La capa con el <strong>mayor</strong> grosor.', think:'gruesa → más gruesa → la más gruesa', hint:'Tiene el grosor más grande, como la fruta del melocotón.' },
+    en:{ word:'Thickest', def:'The layer with the <strong>greatest</strong> thickness.', think:'thick → thicker → thickest', hint:'Greatest thickness, like the fruit of a peach.' } },
+
+  // BLOCK 2
+  { id:'volcano', block:2, svg:SVGS.volcano,
+    es:{ word:'Volcán', def:'Un <strong>relieve</strong>, normalmente una <strong>montaña</strong>, por donde sale <strong>roca fundida</strong> a la superficie.', think:'una montaña con fuego dentro', hint:'Montaña con humo y roca fundida.' },
+    en:{ word:'Volcano', def:'A <strong>landform</strong>, usually a <strong>mountain</strong>, where <strong>molten rock</strong> comes out through Earth’s surface.', think:'a mountain with fire inside', hint:'A mountain with molten rock inside.' } },
+  { id:'landform', block:2, svg:SVGS.landform,
+    es:{ word:'Relieve', def:'Una <strong>forma natural</strong> de la superficie de la Tierra, como una <strong>montaña</strong>.', think:'montañas, colinas, valles', hint:'Son formas naturales de la tierra como las montañas.' },
+    en:{ word:'Landform', def:'A <strong>natural shape</strong> on Earth’s surface, like a <strong>mountain</strong>.', think:'mountains, hills, valleys', hint:'Natural shapes like mountains and hills.' } },
+  { id:'magma', block:2, svg:SVGS.magma,
+    es:{ word:'Magma', def:'<strong>Roca fundida debajo</strong> de la superficie de la Tierra.', think:'Magma = debajo ↓', hint:'Está guardado DEBAJO de la tierra.' },
+    en:{ word:'Magma', def:'<strong>Molten rock under</strong> Earth’s surface.', think:'Magma = under ↓', hint:'It stays UNDER the ground.' } },
+  { id:'crater', block:2, svg:SVGS.crater,
+    es:{ word:'Cráter', def:'La <strong>abertura</strong> en la <strong>parte de arriba</strong> de un volcán.', think:'la boca del volcán', hint:'Es el agujero de arriba del volcán.' },
+    en:{ word:'Crater', def:'The <strong>opening</strong> at the <strong>top</strong> of a volcano.', think:'the mouth of the volcano', hint:'It is the hole at the top of the volcano.' } },
+  { id:'eruption', block:2, svg:SVGS.eruption,
+    es:{ word:'Erupción', def:'Cuando un volcán <strong>expulsa</strong> lava, rocas, gas o ceniza.', think:'el volcán “explota”', hint:'Es el momento en que el volcán expulsa todo fuera.' },
+    en:{ word:'Eruption', def:'When a volcano <strong>releases</strong> lava, rocks, gas or ash.', think:'the volcano “explodes”', hint:'When the volcano throws lava, gas and ash out.' } },
+  { id:'lava', block:2, svg:SVGS.lava,
+    es:{ word:'Lava', def:'<strong>Roca fundida</strong> que <strong>llega</strong> a la superficie de la Tierra.', think:'Lava = fuera ↑', hint:'Cuando el magma sale FUERA y baja por la ladera, se llama lava.' },
+    en:{ word:'Lava', def:'<strong>Molten rock</strong> that <strong>reaches</strong> Earth’s surface.', think:'Lava = out ↑', hint:'When magma comes OUT on the surface, it is lava.' } },
+  { id:'ash', block:2, svg:SVGS.ash,
+    es:{ word:'Ceniza', def:'<strong>Trocitos muy pequeños</strong> de roca y material volcánico <strong>en el aire</strong>.', think:'polvo gris que cae', hint:'Nube gris de polvo volcánico que cae.' },
+    en:{ word:'Ash', def:'<strong>Tiny pieces</strong> of rock and volcanic material <strong>in the air</strong>.', think:'grey dust that falls', hint:'Grey dust falling from a cloud.' } },
+  { id:'eject', block:2, svg:SVGS.eject,
+    es:{ word:'Expulsar', def:'Sacar algo <strong>hacia fuera</strong> con <strong>fuerza</strong>.', think:'la tostada que salta de la tostadora', hint:'Como cuando la tostadora saca las tostadas hacia arriba.' },
+    en:{ word:'Eject', def:'To <strong>force</strong> something <strong>out</strong>.', think:'toast jumping out of a toaster', hint:'Like toast jumping out of a toaster.' } },
+  { id:'rise', block:2, svg:SVGS.rise,
+    es:{ word:'Subir', def:'Moverse <strong>hacia arriba</strong>.', think:'un globo aerostático', hint:'Ir hacia arriba, como un globo.' },
+    en:{ word:'Rise', def:'To move <strong>upwards</strong>.', think:'a hot air balloon', hint:'Moving up, like a hot air balloon.' } },
+
+  // BLOCK 3
+  { id:'plate_tectonics', block:3, svg:SVGS.plate_tectonics,
+    es:{ word:'Tectónica de placas', def:'Una <strong>teoría</strong>: la capa exterior de la Tierra está <strong>dividida</strong> en varias <strong>placas enormes</strong>.', think:'la Tierra es como un puzle', hint:'Explica que la Tierra es como un puzle gigante.' },
+    en:{ word:'Plate tectonics', def:'A <strong>theory</strong>: Earth’s outer layer is <strong>divided</strong> into several <strong>huge plates</strong>.', think:'Earth is like a puzzle', hint:'Explains that Earth is divided like a giant puzzle.' } },
+  { id:'tectonic_plate', block:3, svg:SVGS.tectonic_plate,
+    es:{ word:'Placa tectónica', def:'Una de las <strong>piezas enormes</strong> que forman la <strong>capa exterior</strong> de la Tierra.', think:'una pieza del puzle', hint:'Cada pieza individual del puzle terrestre.' },
+    en:{ word:'Tectonic plate', def:'One of the <strong>huge pieces</strong> that make up Earth’s <strong>outer layer</strong>.', think:'one piece of the puzzle', hint:'Each giant puzzle piece of Earth.' } },
+  { id:'outer_layer', block:3, svg:SVGS.outer_layer,
+    es:{ word:'Capa exterior', def:'La parte de <strong>fuera</strong> de la Tierra.', think:'la piel de una naranja', hint:'Como la cáscara de la naranja.' },
+    en:{ word:'Outer layer', def:'The <strong>outside</strong> part of Earth.', think:'the peel of an orange', hint:'Like the peel of an orange.' } },
+  { id:'boundary', block:3, svg:SVGS.boundary,
+    es:{ word:'Límite', def:'El lugar donde <strong>dos placas tectónicas se encuentran</strong>.', think:'la línea entre dos piezas', hint:'La línea roja donde se juntan dos placas.' },
+    en:{ word:'Boundary', def:'The place where <strong>two tectonic plates meet</strong>.', think:'the line between two pieces', hint:'The line where two plates touch.' } },
+  { id:'move_slowly', block:3, svg:SVGS.move_slowly,
+    es:{ word:'Moverse despacio', def:'Las placas tectónicas se mueven <strong>muy despacio</strong>.', think:'¡más despacio que un caracol!', hint:'Tan despacio como un caracol.' },
+    en:{ word:'Move slowly', def:'Tectonic plates move <strong>very slowly</strong>.', think:'slower than a snail!', hint:'Even slower than a snail.' } },
+  { id:'ocean_trench', block:3, svg:SVGS.ocean_trench,
+    es:{ word:'Fosa oceánica', def:'Una zona <strong>muy profunda</strong> del <strong>fondo del océano</strong>.', think:'un agujero profundo bajo el mar', hint:'Un hoyo muy hondo debajo del agua del mar.' },
+    en:{ word:'Ocean trench', def:'A <strong>very deep</strong> area of the <strong>ocean floor</strong>.', think:'a deep hole under the sea', hint:'A deep V-shaped hole under the ocean.' } },
+  { id:'push_together', block:3, svg:SVGS.push_together,
+    es:{ word:'Chocar', def:'Moverse <strong>una hacia la otra</strong> y <strong>encontrarse</strong>.', think:'→ ← (se juntan)', hint:'Las flechas apuntan una contra la otra: → ←.' },
+    en:{ word:'Push together', def:'To move <strong>towards each other</strong> and <strong>meet</strong>.', think:'→ ← (they crash)', hint:'The arrows point towards each other: → ←.' } },
+  { id:'push_apart', block:3, svg:SVGS.push_apart,
+    es:{ word:'Separarse', def:'Moverse <strong>alejándose</strong> una de la otra.', think:'← → (se separan)', hint:'Las flechas van hacia lados opuestos: ← →.' },
+    en:{ word:'Push apart', def:'To move <strong>away</strong> from each other.', think:'← → (they separate)', hint:'The arrows point away from each other: ← →.' } },
+  { id:'slide_past', block:3, svg:SVGS.slide_past,
+    es:{ word:'Deslizarse', def:'Moverse <strong>de lado</strong>, una junto a la otra.', think:'↑ ↓ (se rozan)', hint:'Una sube y la otra baja rozándose: ↑ ↓.' },
+    en:{ word:'Slide past each other', def:'To move <strong>sideways</strong> past one another.', think:'↑ ↓ (they rub)', hint:'One slides up and the other down: ↑ ↓.' } },
+
+  // BLOCK 4
+  { id:'repercussions', block:4, svg:SVGS.repercussions,
+    es:{ word:'Repercusiones', def:'Los <strong>efectos</strong> o <strong>resultados</strong> de una acción.', think:'fichas de dominó que caen una tras otra', hint:'Como fichas de dominó: una acción provoca otra.' },
+    en:{ word:'Repercussions', def:'The <strong>effects</strong> or <strong>results</strong> of an action.', think:'dominoes falling one after another', hint:'Like dominoes falling one after the other.' } },
+  { id:'natural_resources', block:4, svg:SVGS.natural_resources,
+    es:{ word:'Recursos naturales', def:'Materiales y cosas que <strong>vienen de la naturaleza</strong>.', think:'agua, madera, rocas', hint:'Agua, árboles y rocas vienen de la naturaleza.' },
+    en:{ word:'Natural resources', def:'Materials and things that <strong>come from nature</strong>.', think:'water, wood, rocks', hint:'Water, wood and rocks come from nature.' } },
+  { id:'mineral', block:4, svg:SVGS.mineral,
+    es:{ word:'Mineral', def:'Una <strong>sustancia natural</strong> que se encuentra en las <strong>rocas</strong>.', think:'cristales brillantes en las rocas', hint:'Cristales naturales dentro de las rocas.' },
+    en:{ word:'Mineral', def:'A <strong>natural substance</strong> found in <strong>rocks</strong>.', think:'shiny crystals in rocks', hint:'Shiny natural crystals inside rocks.' } }
+];
+
+/* =========================================================
+   AUDIO (TEXT-TO-SPEECH & GENTLE WEB AUDIO FEEDBACK)
+   ========================================================= */
+let audioCtx = null;
+function playTone(type) {
+  if (!soundOn) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    if (type === 'ok') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.09);
+      gain.gain.setValueAtTime(0.14, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.3);
+    } else if (type === 'win') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.1);
+      osc.frequency.setValueAtTime(783.99, now + 0.2);
+      gain.gain.setValueAtTime(0.16, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+      osc.start(now); osc.stop(now + 0.45);
+    } else {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(240, now);
+      osc.frequency.linearRampToValueAtTime(200, now + 0.18);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+      osc.start(now); osc.stop(now + 0.22);
+    }
+  } catch (e) {}
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function speak(htmlText) {
+  if (!soundOn || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(stripHtml(htmlText));
+  utter.lang = lang === 'es' ? 'es-ES' : 'en-GB';
+  utter.rate = 0.92;
+  window.speechSynthesis.speak(utter);
+}
+
+/* =========================================================
+   CONTROLS & NAVIGATION
+   ========================================================= */
+function toggleLang() {
+  lang = lang === 'es' ? 'en' : 'es';
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  updateStaticUI();
+  renderAll();
+}
+
+function toggleSound() {
+  soundOn = !soundOn;
+  if (!soundOn && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+  updateStaticUI();
+}
+
+function toggleTheme() {
+  darkMode = !darkMode;
+  document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+  updateStaticUI();
+}
+
+function toggleTextSize() {
+  document.body.classList.toggle('large-text');
+  document.getElementById('btn-textsize').classList.toggle('active');
+}
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.getElementById('tab-learn').classList.toggle('active', tab === 'learn');
+  document.getElementById('tab-oral').classList.toggle('active', tab === 'oral');
+  document.getElementById('tab-ex').classList.toggle('active', tab === 'ex');
+
+  document.getElementById('panel-learn').classList.toggle('hidden', tab !== 'learn');
+  document.getElementById('panel-oral').classList.toggle('hidden', tab !== 'oral');
+  document.getElementById('panel-ex').classList.toggle('hidden', tab !== 'ex');
+
+  document.getElementById('block-toolbar').classList.toggle('hidden', tab === 'ex');
+  document.getElementById('learn-view-toggle').classList.toggle('hidden', tab !== 'learn');
+
+  if (tab === 'oral' && flashDeck.length === 0) initFlashDeck();
+  renderAll();
+}
+
+function selectBlock(b) {
+  activeBlock = b;
+  focusIdx = 0;
+  initFlashDeck();
+  renderAll();
+}
+
+function toggleFocusMode() {
+  focusMode = !focusMode;
+  focusIdx = 0;
+  updateStaticUI();
+  renderLearn();
+}
+
+function getFilteredVocab() {
+  return activeBlock === 0 ? VOCAB : VOCAB.filter(v => v.block === activeBlock);
+}
+
+function updateStaticUI() {
+  const t = UI[lang];
+  document.documentElement.lang = lang;
+  document.getElementById('ui-app-title').textContent = t.appTitle;
+  document.getElementById('ui-app-sub').textContent = t.appSub;
+  document.getElementById('btn-lang').innerHTML = `🌐 <span>${lang.toUpperCase()}</span>`;
+  document.getElementById('btn-sound').classList.toggle('active', soundOn);
+  document.getElementById('btn-sound').innerHTML = `${soundOn ? '🔊' : '🔇'} <span>${soundOn ? t.soundOn : t.soundOff}</span>`;
+  document.getElementById('btn-theme').innerHTML = `${darkMode ? '🌙' : '☀️'} <span>${darkMode ? t.dark : t.light}</span>`;
+  document.getElementById('lbl-tab-learn').textContent = t.tabLearn;
+  document.getElementById('lbl-tab-oral').textContent = t.tabOral;
+  document.getElementById('lbl-tab-ex').textContent = t.tabEx;
+  document.getElementById('lbl-focus').textContent = focusMode ? t.focusOn : t.focusOff;
+  document.getElementById('btn-focus-mode').classList.toggle('active', focusMode);
+  document.getElementById('lbl-mastered').textContent = t.mastered;
+  document.getElementById('lbl-reset-cards').textContent = t.resetCards;
+  document.getElementById('lbl-prev1').textContent = t.prev;
+  document.getElementById('lbl-next1').textContent = t.next;
+}
+
+function renderBlockPills() {
+  const t = UI[lang];
+  const el = document.getElementById('block-pills');
+  let html = `<button class="pill ${activeBlock===0?'active':''}" onclick="selectBlock(0)">${t.allBlocks}</button>`;
+  for (let b = 1; b <= 4; b++) {
+    html += `<button class="pill ${activeBlock===b?'active':''}" onclick="selectBlock(${b})">${t.blocks[b]}</button>`;
+  }
+  el.innerHTML = html;
+}
+
+/* =========================================================
+   TAB 1: LEARN & MEMORIZE
+   ========================================================= */
+function renderLearn() {
+  const t = UI[lang];
+  const other = lang === 'es' ? 'en' : 'es';
+  document.getElementById('big-picture-box').innerHTML = `
+    <div>${t.bigIdeas[activeBlock]}</div>
+    <button class="speak-btn" onclick="speak(UI[lang].bigIdeas[${activeBlock}])">🔊 ${t.listen}</button>
+  `;
+
+  const list = getFilteredVocab();
+  const container = document.getElementById('learn-content');
+
+  if (!focusMode) {
+    container.innerHTML = `<div class="vocab-grid">` + list.map(v => {
+      const item = v[lang];
+      const trans = v[other].word;
+      return `
+        <article class="vocab-card">
+          <div class="vocab-top">
+            <div class="svg-box">${v.svg}</div>
+            <div>
+              <h3 class="word-title">${item.word}</h3>
+              <div class="word-trans">${t.inOther} ${trans}</div>
+            </div>
+          </div>
+          <p class="def-text">${item.def}</p>
+          <div class="think-box"><strong>${t.think}</strong> ${item.think}</div>
+          <button class="speak-btn" onclick="speakVocab('${v.id}')">🔊 ${t.listen}</button>
+        </article>`;
+    }).join('') + `</div>`;
+  } else {
+    if (focusIdx >= list.length) focusIdx = 0;
+    const v = list[focusIdx];
+    const item = v[lang];
+    const trans = v[other].word;
+    container.innerHTML = `
+      <div class="focus-wrap">
+        <article class="vocab-card focus-card">
+          <div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);">${focusIdx+1} / ${list.length}</div>
+          <div class="svg-box">${v.svg}</div>
+          <h3 class="word-title" style="font-size:1.5rem;">${item.word}</h3>
+          <div class="word-trans">${t.inOther} ${trans}</div>
+          <p class="def-text" style="font-size:1.12rem;">${item.def}</p>
+          <div class="think-box" style="width:100%;text-align:left;"><strong>${t.think}</strong> ${item.think}</div>
+          <button class="speak-btn" style="align-self:center;" onclick="speakVocab('${v.id}')">🔊 ${t.listen}</button>
+        </article>
+        <div class="focus-nav">
+          <button class="nav-btn" ${focusIdx===0?'disabled':''} onclick="focusIdx--;renderLearn();">⬅️ ${t.prev}</button>
+          <button class="nav-btn" ${focusIdx===list.length-1?'disabled':''} onclick="focusIdx++;renderLearn();">${t.next} ➡️</button>
+        </div>
+      </div>`;
+  }
+}
+
+function speakVocab(id) {
+  const v = VOCAB.find(x => x.id === id);
+  if (!v) return;
+  const item = v[lang];
+  speak(`${item.word}. ${item.def}`);
+}
+
+/* =========================================================
+   TAB 2: ORAL PRACTICE / FLIP CARDS
+   ========================================================= */
+function initFlashDeck() {
+  flashDeck = getFilteredVocab().map(v => v.id);
+  flashIdx = 0;
+  flashFlipped = false;
+  flashPeekWord = false;
+}
+
+function resetFlashcards() {
+  masteredIds.clear();
+  initFlashDeck();
+  renderOral();
+}
+
+function renderOral() {
+  const t = UI[lang];
+  const other = lang === 'es' ? 'en' : 'es';
+  document.getElementById('flash-mastered-count').textContent = masteredIds.size;
+  const box = document.getElementById('flashcard-box');
+
+  if (flashDeck.length === 0) {
+    document.getElementById('flash-counter').textContent = `0 / 0`;
+    box.innerHTML = `
+      <div style="font-size:2.5rem;">🏆</div>
+      <p style="font-size:1.15rem;font-weight:700;">${t.deckFinished}</p>
+      <button class="big-action-btn" onclick="resetFlashcards()">🔄 ${t.resetCards}</button>
+    `;
+    document.getElementById('flash-prev').disabled = true;
+    document.getElementById('flash-next').disabled = true;
+    return;
+  }
+
+  if (flashIdx >= flashDeck.length) flashIdx = 0;
+  if (flashIdx < 0) flashIdx = flashDeck.length - 1;
+
+  document.getElementById('flash-counter').textContent = `${t.card} ${flashIdx + 1} ${t.of} ${flashDeck.length}`;
+  document.getElementById('flash-prev').disabled = flashDeck.length <= 1;
+  document.getElementById('flash-next').disabled = flashDeck.length <= 1;
+
+  const v = VOCAB.find(x => x.id === flashDeck[flashIdx]);
+  const item = v[lang];
+
+  if (!flashFlipped) {
+    box.innerHTML = `
+      <span class="pill" style="font-size:0.8rem;">${t.blocks[v.block]}</span>
+      <div class="svg-box">${v.svg}</div>
+      <p style="font-weight:600;color:var(--text-muted);margin:0;">${t.oralPrompt}</p>
+      ${flashPeekWord ? `<div class="word-title" style="font-size:1.4rem;">${item.word}</div>` : ''}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        ${!flashPeekWord ? `<button class="secondary-btn" onclick="flashPeekWord=true;renderOral();">${t.peekWord}</button>` : ''}
+        <button class="big-action-btn" onclick="flashFlipped=true;renderOral();speakVocab('${v.id}')">${t.flipCard}</button>
+      </div>
+    `;
+  } else {
+    box.innerHTML = `
+      <div class="svg-box" style="width:100px;height:100px;">${v.svg}</div>
+      <h3 class="word-title" style="font-size:1.5rem;">${item.word}</h3>
+      <div class="word-trans">${t.inOther} ${v[other].word}</div>
+      <p class="def-text" style="font-size:1.1rem;">${item.def}</p>
+      <div class="think-box" style="width:100%;text-align:left;"><strong>${t.think}</strong> ${item.think}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <button class="speak-btn" onclick="speakVocab('${v.id}')">🔊 ${t.listen}</button>
+        <button class="secondary-btn" onclick="flashFlipped=false;renderOral();">${t.flipBack}</button>
+      </div>
+      <div class="eval-row">
+        <button class="btn-knew" onclick="markFlash(true)">${t.knewIt}</button>
+        <button class="btn-review" onclick="markFlash(false)">${t.reviewLater}</button>
+      </div>
+    `;
+  }
+}
+
+function moveFlash(delta) {
+  flashIdx = (flashIdx + delta + flashDeck.length) % flashDeck.length;
+  flashFlipped = false;
+  flashPeekWord = false;
+  renderOral();
+}
+
+function markFlash(knew) {
+  const id = flashDeck[flashIdx];
+  if (knew) {
+    playTone('ok');
+    masteredIds.add(id);
+    flashDeck.splice(flashIdx, 1);
+    if (flashIdx >= flashDeck.length) flashIdx = 0;
+  } else {
+    // Move current card to end of deck for gentle repetition
+    flashDeck.splice(flashIdx, 1);
+    flashDeck.push(id);
+  }
+  flashFlipped = false;
+  flashPeekWord = false;
+  renderOral();
+}
+
+/* =========================================================
+   TAB 3: EXERCISES (ALL 10 ACTIVITIES FROM PDFs)
+   ========================================================= */
+const EXERCISES = [
+  { id:'1', label:'1', type:'diagram_earth' },
+  { id:'2', label:'2', type:'diagram_volcano' },
+  { id:'3', label:'3', type:'match_3' },
+  { id:'4', label:'4', type:'match_4' },
+  { id:'5a', label:'5a', type:'blanks_5a' },
+  { id:'5b', label:'5b', type:'blanks_5b' },
+  { id:'5c', label:'5c', type:'blanks_5c' },
+  { id:'6', label:'6', type:'plates_6' },
+  { id:'7', label:'7', type:'layers_7' },
+  { id:'8', label:'8', type:'magma_8' },
+  { id:'9', label:'9', type:'sort_9' },
+  { id:'10', label:'10', type:'tf_10' }
+];
+
+// Working state per exercise
+let exState = {};
+
+function renderExercises() {
+  const stepsEl = document.getElementById('ex-steps');
+  stepsEl.innerHTML = EXERCISES.map((ex, idx) => `
+    <button class="ex-step ${idx===currentExIdx?'current':''} ${completedEx.has(ex.id)?'done':''}" onclick="goExercise(${idx})">
+      ${completedEx.has(ex.id) ? '✓ ' : ''}${ex.label}
+    </button>
+  `).join('');
+
+  const ex = EXERCISES[currentExIdx];
+  if (!exState[ex.id]) initExState(ex);
+  renderCurrentExercise(ex);
+}
+
+function goExercise(idx) {
+  currentExIdx = idx;
+  renderExercises();
+}
+
+function markExDone(id) {
+  completedEx.add(id);
+  localStorage.setItem('earth_done_ex', JSON.stringify([...completedEx]));
+  playTone('win');
+}
+
+function showFeedback(isOk, htmlMsg) {
+  const box = document.getElementById('ex-feedback');
+  if (!box) return;
+  box.className = `feedback-box show ${isOk ? 'ok' : 'hint'}`;
+  box.innerHTML = htmlMsg;
+  if (!isOk) {
+    box.classList.add('shake');
+    setTimeout(() => box.classList.remove('shake'), 350);
+  }
+}
+
+function initExState(ex) {
+  if (ex.type === 'diagram_earth') {
+    exState[ex.id] = { slots: [0, null, null, null, null], activeSlot: 1, done: false };
+    // Slot 0 (number 1) is pre-filled as example like in PDF!
+  } else if (ex.type === 'diagram_volcano') {
+    exState[ex.id] = { slots: [0, null, null, null, null], activeSlot: 1, done: false };
+  } else if (ex.type === 'match_3' || ex.type === 'match_4') {
+    exState[ex.id] = { selLeft: null, matched: [], wrongCount: 0 };
+  } else if (ex.type.startsWith('blanks_')) {
+    exState[ex.id] = { slots: [0, null, null, null, null], activeSlot: 1, done: false };
+  } else if (ex.type === 'plates_6') {
+    exState[ex.id] = { answers: [null, null, null], done: false };
+  } else if (ex.type === 'layers_7') {
+    exState[ex.id] = { c1: null, c2: null, order: ['', '', ''], done: false };
+  } else if (ex.type === 'magma_8') {
+    exState[ex.id] = { answers: [null, null, null, null], done: false };
+  } else if (ex.type === 'sort_9') {
+    exState[ex.id] = { selectedWord: null, groups: { layers:[], volcanoes:[], plates:[] }, done: false };
+  } else if (ex.type === 'tf_10') {
+    exState[ex.id] = { answers: [null, null, null, null, null], done: false };
+  }
+}
+
+function renderCurrentExercise(ex) {
+  const stage = document.getElementById('ex-stage');
+  const t = UI[lang];
+
+  /* --- EX 1 & EX 2: LABELED DIAGRAMS --- */
+  if (ex.type === 'diagram_earth' || ex.type === 'diagram_volcano') {
+    const isEarth = ex.type === 'diagram_earth';
+    const title = isEarth
+      ? (lang==='es' ? '1. Nombra las partes de la Tierra' : '1. Name the parts of the Earth')
+      : (lang==='es' ? '2. Nombra las partes del volcán' : '2. Name the parts of the volcano');
+    const answers = isEarth
+      ? (lang==='es' ? ['Atmósfera','Hidrosfera','Corteza','Manto','Núcleo'] : ['Atmosphere','Hydrosphere','Crust','Mantle','Core'])
+      : (lang==='es' ? ['Ceniza','Cráter','Lava','Superficie','Magma'] : ['Ash','Crater','Lava','Surface','Magma']);
+    const bankOrder = isEarth ? [3, 0, 4, 1, 2] : [2, 4, 0, 3, 1];
+    const hints = isEarth
+      ? (lang==='es'
+          ? ['Capa de aire exterior','Agua azul sobre la corteza','Capa fina exterior de roca','Capa gruesa naranja bajo la corteza','Centro amarillo muy caliente']
+          : ['Outer layer of air','Blue water on the crust','Thin outer rocky layer','Thick orange layer under crust','Very hot yellow centre'])
+      : (lang==='es'
+          ? ['Nube gris de polvo arriba','Abertura arriba del volcán','Roca roja saliendo por fuera','Suelo donde apoya el volcán','Bolsa naranja debajo del suelo']
+          : ['Grey dust cloud at the top','Opening at the top','Red rock flowing outside','Ground surface','Orange chamber under the ground']);
+
+    const st = exState[ex.id];
+    const usedIndices = new Set(st.slots.filter(v => v !== null));
+
+    const diagramSvg = isEarth ? `
+      <svg class="diagram-svg" viewBox="0 0 260 240">
+        <circle cx="110" cy="120" r="95" fill="#DCEEFB" stroke="#1E293B" stroke-width="2.5" stroke-dasharray="6 4"/>
+        <circle cx="110" cy="120" r="74" fill="#8D5524" stroke="#1E293B" stroke-width="2.5"/>
+        <path d="M55 72 A70 70 0 0 1 112 50" fill="none" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="110" cy="120" r="64" fill="#EA7B34" stroke="#1E293B" stroke-width="2"/>
+        <circle cx="110" cy="120" r="32" fill="#F97316" stroke="#1E293B" stroke-width="2"/>
+        <circle cx="110" cy="120" r="16" fill="#FACC15" stroke="#1E293B" stroke-width="2"/>
+        <!-- Pointers 1-5 -->
+        <line x1="110" y1="32" x2="215" y2="32" stroke="#1E293B" stroke-width="2"/><circle cx="110" cy="32" r="4" fill="#1E293B"/>
+        <line x1="78" y1="62" x2="215" y2="68" stroke="#1E293B" stroke-width="2"/><circle cx="78" cy="62" r="4" fill="#1E293B"/>
+        <line x1="176" y1="98" x2="215" y2="104" stroke="#1E293B" stroke-width="2"/><circle cx="176" cy="98" r="4" fill="#1E293B"/>
+        <line x1="152" y1="138" x2="215" y2="144" stroke="#1E293B" stroke-width="2"/><circle cx="152" cy="138" r="4" fill="#1E293B"/>
+        <line x1="110" y1="120" x2="215" y2="184" stroke="#1E293B" stroke-width="2"/><circle cx="110" cy="120" r="4" fill="#1E293B"/>
+        ${[32,68,104,144,184].map((y,i)=>`<circle cx="228" cy="${y}" r="13" fill="#124578"/><text x="228" y="${y+5}" text-anchor="middle" fill="#FFF" font-weight="bold" font-size="13">${i+1}</text>`).join('')}
+      </svg>` : `
+      <svg class="diagram-svg" viewBox="0 0 260 220">
+        <rect x="14" y="135" width="180" height="70" fill="#8D5524" stroke="#1E293B" stroke-width="2.5"/>
+        <polygon points="34,135 80,62 110,62 156,135" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/>
+        <rect x="89" y="62" width="12" height="106" fill="#FDBA74" stroke="#1E293B" stroke-width="2"/>
+        <ellipse cx="95" cy="176" rx="38" ry="16" fill="#FB923C" stroke="#1E293B" stroke-width="2"/>
+        <path d="M88 62 L110 62 L145 135 L125 135 L105 90 L95 74 Z" fill="#EF4444" stroke="#1E293B" stroke-width="2"/>
+        <path d="M35 45 H88 A14 14 0 0 0 85 17 A18 18 0 0 0 46 15 A14 14 0 0 0 35 45 Z" fill="#64748B" stroke="#1E293B" stroke-width="2.5"/>
+        <!-- Pointers 1-5 -->
+        <line x1="65" y1="30" x2="215" y2="30" stroke="#1E293B" stroke-width="2"/><circle cx="65" cy="30" r="4" fill="#1E293B"/>
+        <line x1="95" y1="62" x2="215" y2="66" stroke="#1E293B" stroke-width="2"/><circle cx="95" cy="62" r="4" fill="#1E293B"/>
+        <line x1="126" y1="110" x2="215" y2="104" stroke="#1E293B" stroke-width="2"/><circle cx="126" cy="110" r="4" fill="#1E293B"/>
+        <line x1="165" y1="135" x2="215" y2="142" stroke="#1E293B" stroke-width="2"/><circle cx="165" cy="135" r="4" fill="#1E293B"/>
+        <line x1="95" y1="176" x2="215" y2="180" stroke="#1E293B" stroke-width="2"/><circle cx="95" cy="176" r="4" fill="#1E293B"/>
+        ${[30,66,104,142,180].map((y,i)=>`<circle cx="228" cy="${y}" r="13" fill="#124578"/><text x="228" y="${y+5}" text-anchor="middle" fill="#FFF" font-weight="bold" font-size="13">${i+1}</text>`).join('')}
+      </svg>`;
+
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      <p style="margin-top:0;color:var(--text-muted);">${lang==='es'?'Toca un número y luego toca su palabra en el banco. El 1 ya está hecho de ejemplo.':'Tap a number slot, then tap its matching word below. Number 1 is already done as an example.'}</p>
+      <div class="word-bank">
+        ${bankOrder.map(idx => `
+          <button class="chip ${usedIndices.has(idx)?'used':''}" onclick="placeSlotWord('${ex.id}', ${idx})">${answers[idx]}</button>
+        `).join('')}
+      </div>
+      <div class="diagram-layout">
+        ${diagramSvg}
+        <div>
+          ${[0,1,2,3,4].map(slotIdx => {
+            const val = st.slots[slotIdx];
+            const isCorrect = val === slotIdx;
+            return `
+              <div class="num-list-row">
+                <div class="num-badge">${slotIdx+1}</div>
+                <button class="blank-slot ${st.activeSlot===slotIdx?'active-slot':''} ${isCorrect?'correct':''}"
+                  onclick="selectSlot('${ex.id}', ${slotIdx})">
+                  ${val !== null ? answers[val] : '________'}
+                </button>
+              </div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="secondary-btn" onclick="giveDiagramHint('${ex.id}')">${t.hintBtn}</button>
+        ${st.done && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+
+    window.selectSlot = (id, slotIdx) => {
+      if (exState[id].slots[slotIdx] === slotIdx) return; // already locked correct
+      exState[id].activeSlot = slotIdx;
+      renderCurrentExercise(EXERCISES[currentExIdx]);
+    };
+
+    window.placeSlotWord = (id, wordIdx) => {
+      const s = exState[id];
+      const slot = s.activeSlot;
+      if (slot === null || s.slots[slot] === slot) {
+        showFeedback(false, t.tapSlotFirst);
+        return;
+      }
+      if (wordIdx === slot) {
+        s.slots[slot] = wordIdx;
+        playTone('ok');
+        // Move to next empty slot
+        const nextEmpty = s.slots.findIndex(v => v === null);
+        s.activeSlot = nextEmpty;
+        if (nextEmpty === -1) {
+          s.done = true;
+          markExDone(id);
+          renderExercises();
+          showFeedback(true, t.allCorrect);
+        } else {
+          renderCurrentExercise(EXERCISES[currentExIdx]);
+        }
+      } else {
+        playTone('err');
+        renderCurrentExercise(EXERCISES[currentExIdx]);
+        showFeedback(false, `${t.retryHint} <strong>#${slot+1}:</strong> ${hints[slot]}`);
+      }
+    };
+
+    window.giveDiagramHint = (id) => {
+      const s = exState[id];
+      const slot = s.activeSlot !== null ? s.activeSlot : s.slots.findIndex(v => v === null);
+      if (slot >= 0) showFeedback(false, `💡 <strong>#${slot+1}:</strong> ${hints[slot]}`);
+    };
+  }
+
+  /* --- EX 3 & EX 4: MATCH PICTURE AND MEANING --- */
+  else if (ex.type === 'match_3' || ex.type === 'match_4') {
+    const is3 = ex.type === 'match_3';
+    const pairs = is3 ? [
+      { id:'core', svg:SVGS.core, es:'La parte <strong>más caliente</strong> de la geosfera.', en:'The <strong>hottest</strong> part of the geosphere.' },
+      { id:'crater', svg:SVGS.crater, es:'La <strong>abertura</strong> en la <strong>parte de arriba</strong> de un volcán.', en:'The <strong>opening</strong> at the <strong>top</strong> of a volcano.' },
+      { id:'boundary', svg:SVGS.boundary, es:'El lugar donde <strong>dos placas tectónicas se encuentran</strong>.', en:'The place where <strong>two tectonic plates meet</strong>.' },
+      { id:'mineral', svg:SVGS.mineral, es:'Una <strong>sustancia natural</strong> que se encuentra en las <strong>rocas</strong>.', en:'A <strong>natural substance</strong> found in <strong>rocks</strong>.' },
+      { id:'ash', svg:SVGS.ash, es:'<strong>Trocitos muy pequeños</strong> de roca y material volcánico <strong>en el aire</strong>.', en:'<strong>Tiny pieces</strong> of rock and volcanic material <strong>in the air</strong>.' }
+    ] : [
+      { id:'atmosphere', svg:SVGS.atmosphere, es:'La capa de <strong>aire</strong> que rodea la Tierra.', en:'The layer of <strong>air</strong> around Earth.' },
+      { id:'eject', svg:SVGS.eject, es:'Sacar algo <strong>hacia fuera</strong> con <strong>fuerza</strong>.', en:'To <strong>force</strong> something <strong>out</strong>.' },
+      { id:'ocean_trench', svg:SVGS.ocean_trench, es:'Una zona <strong>muy profunda</strong> del <strong>fondo del océano</strong>.', en:'A <strong>very deep</strong> area of the <strong>ocean floor</strong>.' },
+      { id:'landform', svg:SVGS.landform, es:'Una <strong>forma natural</strong> de la superficie de la Tierra, como una <strong>montaña</strong>.', en:'A <strong>natural shape</strong> on Earth’s surface, like a <strong>mountain</strong>.' },
+      { id:'rise', svg:SVGS.rise, es:'Moverse <strong>hacia arriba</strong>.', en:'To move <strong>upwards</strong>.' }
+    ];
+    // Shuffled right order matching PDF pages 8 & 9
+    const rightOrder = is3 ? [3, 0, 4, 1, 2] : [2, 4, 0, 3, 1];
+    const st = exState[ex.id];
+    const title = is3
+      ? (lang==='es' ? '3. Une el dibujo con su significado' : '3. Match the picture and the meaning')
+      : (lang==='es' ? '4. Une el dibujo con su significado' : '4. Match the picture and the meaning');
+
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      <p style="margin-top:0;color:var(--text-muted);">${lang==='es'?'Toca primero un dibujo de la izquierda y después su frase a la derecha.':'Tap a picture on the left first, then tap its matching meaning on the right.'}</p>
+      <div class="match-grid">
+        <div class="match-col">
+          ${pairs.map((p, idx) => `
+            <button class="match-item ${st.selLeft===idx?'selected':''} ${st.matched.includes(p.id)?'matched':''}"
+              onclick="selectMatchLeft('${ex.id}', ${idx})">
+              <div class="num-badge">${idx+1}</div>
+              <div class="svg-box" style="width:58px;height:58px;">${p.svg}</div>
+              ${st.matched.includes(p.id) ? `<strong>✓ ${VOCAB.find(v=>v.id===p.id)[lang].word}</strong>` : ''}
+            </button>
+          `).join('')}
+        </div>
+        <div class="match-col">
+          ${rightOrder.map(pIdx => {
+            const p = pairs[pIdx];
+            return `
+              <button class="match-item ${st.matched.includes(p.id)?'matched':''}"
+                onclick="selectMatchRight('${ex.id}', ${pIdx}, '${p.id}')">
+                <span>${p[lang]}</span>
+              </button>`;
+          }).join('')}
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        ${st.matched.length === pairs.length && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+
+    window.selectMatchLeft = (id, idx) => {
+      exState[id].selLeft = idx;
+      renderCurrentExercise(EXERCISES[currentExIdx]);
+    };
+
+    window.selectMatchRight = (id, pIdx, pId) => {
+      const s = exState[id];
+      if (s.selLeft === null) {
+        showFeedback(false, lang==='es' ? '👆 Toca primero un dibujo de la izquierda.' : '👆 Tap a picture on the left first.');
+        return;
+      }
+      if (s.selLeft === pIdx) {
+        s.matched.push(pId);
+        s.selLeft = null;
+        playTone('ok');
+        if (s.matched.length === pairs.length) {
+          markExDone(id);
+          renderExercises();
+          showFeedback(true, t.allCorrect);
+        } else {
+          renderCurrentExercise(EXERCISES[currentExIdx]);
+        }
+      } else {
+        playTone('err');
+        const targetId = pairs[s.selLeft].id;
+        const hintText = VOCAB.find(v => v.id === targetId)[lang].hint;
+        showFeedback(false, `${t.retryHint} <strong>#${s.selLeft+1}:</strong> ${hintText}`);
+      }
+    };
+  }
+
+  /* --- EX 5a, 5b, 5c: COMPLETE THE SENTENCES --- */
+  else if (ex.type.startsWith('blanks_')) {
+    const sets = {
+      blanks_5a: {
+        title: { es:'5a. Completa las frases (Capas de la Tierra)', en:'5a. Complete the sentences (Earth layers)' },
+        words: { es:['Atmósfera','Corteza','Núcleo','Manto','Hidrosfera'], en:['Atmosphere','Crust','Core','Mantle','Hydrosphere'] },
+        sentences: {
+          es: [
+            ['La ', ' es la capa de aire que rodea la Tierra.'],
+            ['La ', ' es la capa más fina.'],
+            ['El ', ' es la parte más caliente. Está en el centro.'],
+            ['El ', ' es la capa más gruesa.'],
+            ['Los océanos, ríos y lagos forman parte de la ', '.']
+          ],
+          en: [
+            ['The ', ' is the layer of air around Earth.'],
+            ['The ', ' is the thinnest layer.'],
+            ['The ', ' is the hottest part. It is at the centre.'],
+            ['The ', ' is the thickest layer.'],
+            ['Oceans, rivers and lakes are part of the ', '.']
+          ]
+        },
+        hints: {
+          es: ['Ejemplo hecho','Piel del melocotón (más fina)','Hueso del melocotón (en el centro)','Fruta del melocotón (más gruesa)','Hidro = agua'],
+          en: ['Example done','Skin of a peach (thinnest)','Stone of a peach (at the centre)','Fruit of a peach (thickest)','Hydro = water']
+        }
+      },
+      blanks_5b: {
+        title: { es:'5b. Completa las frases (Volcanes)', en:'5b. Complete the sentences (Volcanoes)' },
+        words: { es:['Magma','Lava','Cráter','Erupción','Ceniza'], en:['Magma','Lava','Crater','Eruption','Ash'] },
+        sentences: {
+          es: [
+            ['', ' es roca fundida debajo de la superficie.'],
+            ['Cuando el magma llega a la superficie, se llama ', '.'],
+            ['La lava sale por el ', ' en la parte de arriba del volcán.'],
+            ['En una ', ', el volcán expulsa lava, gas y ceniza.'],
+            ['', ' son trocitos muy pequeños de roca en el aire.']
+          ],
+          en: [
+            ['', ' is molten rock under the surface.'],
+            ['When magma reaches the surface, we call it ', '.'],
+            ['Lava comes out of the ', ' at the top of the volcano.'],
+            ['In an ', ', a volcano releases lava, gas and ash.'],
+            ['', ' is made of tiny pieces of rock in the air.']
+          ]
+        },
+        hints: {
+          es: ['Ejemplo hecho','Recuerda: fuera = Lava ↑','La boca de arriba del volcán','Cuando el volcán "explota"','Polvo gris en el aire'],
+          en: ['Example done','Remember: out = Lava ↑','The opening at the top','When the volcano "explodes"','Grey dust in the air']
+        }
+      },
+      blanks_5c: {
+        title: { es:'5c. Completa las frases (Placas y Recursos)', en:'5c. Complete the sentences (Plates & Resources)' },
+        words: { es:['placas tectónicas','Límite','despacio','Fosa oceánica','Recursos naturales'], en:['tectonic plates','Boundary','slowly','Ocean trench','Natural resources'] },
+        sentences: {
+          es: [
+            ['La capa exterior de la Tierra está dividida en enormes ', '.'],
+            ['Un ', ' es el lugar donde se encuentran dos placas.'],
+            ['Las placas tectónicas se mueven muy ', '.'],
+            ['Una ', ' es una zona muy profunda del fondo del océano.'],
+            ['El agua, la madera y los minerales son ', '.']
+          ],
+          en: [
+            ['Earth’s outer layer is divided into huge ', '.'],
+            ['A ', ' is where two plates meet.'],
+            ['Tectonic plates move very ', '.'],
+            ['An ', ' is a very deep area of the ocean floor.'],
+            ['Water, wood and minerals are ', '.']
+          ]
+        },
+        hints: {
+          es: ['Ejemplo hecho','La línea donde se juntan dos placas','Más lento que un caracol','Agujero profundo bajo el mar','Vienen de la naturaleza'],
+          en: ['Example done','Line where two plates meet','Slower than a snail','Deep hole under the sea','They come from nature']
+        }
+      }
+    };
+
+    const data = sets[ex.type];
+    const words = data.words[lang];
+    const st = exState[ex.id];
+    const used = new Set(st.slots.filter(v => v !== null));
+    const bankOrder = [2, 0, 4, 1, 3];
+
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${data.title[lang]}</h3>
+        <button class="speak-btn" onclick="speak('${data.title[lang]}')">🔊 ${t.listen}</button>
+      </div>
+      <div class="word-bank">
+        ${bankOrder.map(idx => `
+          <button class="chip ${used.has(idx)?'used':''}" onclick="placeBlankWord('${ex.id}', ${idx})">${words[idx]}</button>
+        `).join('')}
+      </div>
+      ${data.sentences[lang].map((parts, idx) => {
+        const val = st.slots[idx];
+        const ok = val === idx;
+        return `
+          <div class="sentence-row">
+            <strong>${idx+1}.</strong> ${parts[0]}
+            <button class="blank-slot ${st.activeSlot===idx?'active-slot':''} ${ok?'correct':''}"
+              onclick="selectBlank('${ex.id}', ${idx})">
+              ${val !== null ? words[val] : '________'}
+            </button>
+            ${parts[1]}
+            <button class="speak-btn" style="padding:3px 8px;font-size:0.78rem;margin-left:6px;" onclick="speak('${(parts[0] + ' ... ' + parts[1]).replace(/'/g,"\\'")}')">🔊</button>
+          </div>`;
+      }).join('')}
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="secondary-btn" onclick="giveBlankHint('${ex.id}')">${t.hintBtn}</button>
+        ${st.done && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+
+    window.selectBlank = (id, idx) => {
+      if (exState[id].slots[idx] === idx) return;
+      exState[id].activeSlot = idx;
+      renderCurrentExercise(EXERCISES[currentExIdx]);
+    };
+
+    window.placeBlankWord = (id, wIdx) => {
+      const s = exState[id];
+      const slot = s.activeSlot;
+      if (slot === null || s.slots[slot] === slot) {
+        showFeedback(false, t.tapSlotFirst);
+        return;
+      }
+      if (wIdx === slot) {
+        s.slots[slot] = wIdx;
+        playTone('ok');
+        const nextEmpty = s.slots.findIndex(v => v === null);
+        s.activeSlot = nextEmpty;
+        if (nextEmpty === -1) {
+          s.done = true;
+          markExDone(id);
+          renderExercises();
+          showFeedback(true, t.allCorrect);
+        } else {
+          renderCurrentExercise(EXERCISES[currentExIdx]);
+        }
+      } else {
+        playTone('err');
+        showFeedback(false, `${t.retryHint} ${data.hints[lang][slot]}`);
+      }
+    };
+
+    window.giveBlankHint = (id) => {
+      const s = exState[id];
+      const slot = s.activeSlot !== null ? s.activeSlot : s.slots.findIndex(v => v === null);
+      if (slot >= 0) showFeedback(false, `💡 <strong>#${slot+1}:</strong> ${data.hints[lang][slot]}`);
+    };
+  }
+
+  /* --- EX 6: HOW DO PLATES MOVE? --- */
+  else if (ex.type === 'plates_6') {
+    const title = lang==='es' ? '6. ¿Cómo se mueven las placas? Mira y elige' : '6. How do the plates move? Look and choose';
+    const opts = lang==='es' ? ['Chocar','Separarse','Deslizarse'] : ['Push together','Push apart','Slide past each other'];
+    const items = [
+      { svg: SVGS.push_apart, correct: 1, hint: lang==='es'?'Mira las flechas: ← → van hacia lados contrarios.':'Look at the arrows: ← → they move away.' },
+      { svg: SVGS.slide_past, correct: 2, hint: lang==='es'?'Una sube y otra baja de lado: ↑ ↓.':'One goes up, one goes down sideways: ↑ ↓.' },
+      { svg: SVGS.push_together, correct: 0, hint: lang==='es'?'Las flechas van una hacia la otra: → ←.':'Arrows point towards each other: → ←.' }
+    ];
+    const st = exState[ex.id];
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      ${items.map((it, idx) => `
+        <div class="choice-row">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="num-badge">${idx+1}</div>
+            <div class="svg-box">${it.svg}</div>
+          </div>
+          <div class="choice-btns">
+            ${opts.map((op, oIdx) => `
+              <button class="opt-btn ${st.answers[idx]===oIdx?'correct':''}" onclick="answerPlate(${idx}, ${oIdx})">${op}</button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+      <div style="margin-top:14px;">
+        ${st.done && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+    window.answerPlate = (idx, oIdx) => {
+      if (oIdx === items[idx].correct) {
+        st.answers[idx] = oIdx;
+        playTone('ok');
+        if (st.answers.every((v, i) => v === items[i].correct)) {
+          st.done = true; markExDone(ex.id); renderExercises(); showFeedback(true, t.allCorrect);
+        } else renderCurrentExercise(EXERCISES[currentExIdx]);
+      } else {
+        playTone('err');
+        showFeedback(false, `${t.retryHint} ${items[idx].hint}`);
+      }
+    };
+  }
+
+  /* --- EX 7: THINNEST OR THICKEST + ORDER --- */
+  else if (ex.type === 'layers_7') {
+    const title = lang==='es' ? '7. ¿La más fina o la más gruesa? Y ordena 1, 2, 3' : '7. Thinnest or thickest? And order 1, 2, 3';
+    const st = exState[ex.id];
+    const optThin = lang==='es' ? 'más fina' : 'thinnest';
+    const optThick = lang==='es' ? 'más gruesa' : 'thickest';
+    const labels = lang==='es' ? ['Núcleo','Corteza','Manto'] : ['Core','Crust','Mantle'];
+    const correctOrder = ['3', '1', '2']; // Núcleo=3, Corteza=1, Manto=2
+
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      <div class="choice-row">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="svg-box" style="width:64px;height:64px;">${SVGS.crust}</div>
+          <strong>1. ${lang==='es'?'La corteza es la capa...':'The crust is the...'}</strong>
+        </div>
+        <div class="choice-btns">
+          <button class="opt-btn ${st.c1===0?'correct':''}" onclick="ansEx7Choice(1, 0)">${optThin}</button>
+          <button class="opt-btn" onclick="ansEx7Choice(1, 1)">${optThick}</button>
+        </div>
+      </div>
+      <div class="choice-row">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="svg-box" style="width:64px;height:64px;">${SVGS.mantle}</div>
+          <strong>2. ${lang==='es'?'El manto es la capa...':'The mantle is the...'}</strong>
+        </div>
+        <div class="choice-btns">
+          <button class="opt-btn" onclick="ansEx7Choice(2, 0)">${optThin}</button>
+          <button class="opt-btn ${st.c2===1?'correct':''}" onclick="ansEx7Choice(2, 1)">${optThick}</button>
+        </div>
+      </div>
+      <div class="sentence-row">
+        <p style="margin-top:0;font-weight:700;">${lang==='es'?'Escribe 1, 2, 3: desde fuera hasta el centro.':'Write 1, 2, 3: from the outside to the centre.'}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;">
+          ${labels.map((lb, idx) => `
+            <div style="display:flex;align-items:center;gap:8px;">
+              <strong>${lb}:</strong>
+              <select onchange="ansEx7Order(${idx}, this.value)" style="font-size:1.1rem;font-weight:700;padding:8px 14px;border-radius:10px;border:2px solid var(--primary);background:var(--surface);color:var(--text);">
+                <option value="">?</option>
+                <option value="1" ${st.order[idx]==='1'?'selected':''}>1</option>
+                <option value="2" ${st.order[idx]==='2'?'selected':''}>2</option>
+                <option value="3" ${st.order[idx]==='3'?'selected':''}>3</option>
+              </select>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        ${st.done && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+
+    function check7() {
+      if (st.c1 === 0 && st.c2 === 1 && st.order.every((v, i) => v === correctOrder[i])) {
+        st.done = true; markExDone(ex.id); renderExercises(); showFeedback(true, t.allCorrect);
+      }
+    }
+    window.ansEx7Choice = (q, val) => {
+      if ((q===1 && val===0) || (q===2 && val===1)) {
+        if (q===1) st.c1 = 0; else st.c2 = 1;
+        playTone('ok'); renderCurrentExercise(EXERCISES[currentExIdx]); check7();
+      } else {
+        playTone('err');
+        showFeedback(false, q===1 ? (lang==='es'?'🍑 Piensa: la corteza es como la piel fina del melocotón.':'🍑 Think: the crust is like the thin skin of a peach.') : (lang==='es'?'🍑 Piensa: el manto es la fruta gruesa del melocotón.':'🍑 Think: the mantle is the thick fruit of a peach.'));
+      }
+    };
+    window.ansEx7Order = (idx, val) => {
+      st.order[idx] = val;
+      if (val && val !== correctOrder[idx]) {
+        playTone('err');
+        showFeedback(false, lang==='es'?'🍑 De fuera hacia dentro: 1º piel (Corteza), 2º fruta (Manto), 3º hueso (Núcleo).':'🍑 From outside to centre: 1st skin (Crust), 2nd fruit (Mantle), 3rd stone (Core).');
+      } else if (val === correctOrder[idx]) {
+        playTone('ok');
+        check7();
+      }
+    };
+  }
+
+  /* --- EX 8: MAGMA OR LAVA? --- */
+  else if (ex.type === 'magma_8') {
+    const title = lang==='es' ? '8. ¿Magma o lava?' : '8. Magma or lava?';
+    const qs = lang==='es' ? [
+      { q:'1. Está <strong>debajo</strong> de la superficie.', ans:'Magma', hint:'Debajo ↓ = Magma.' },
+      { q:'2. Sale <strong>fuera</strong> del volcán.', ans:'Lava', hint:'Fuera ↑ = Lava.' },
+      { q:'3. Baja por la ladera del volcán.', ans:'Lava', hint:'Si baja por fuera de la montaña, ya está fuera ↑.' },
+      { q:'4. Está en una gran cámara bajo el volcán.', ans:'Magma', hint:'Bajo el volcán es debajo ↓.' }
+    ] : [
+      { q:'1. It is <strong>under</strong> Earth’s surface.', ans:'Magma', hint:'Under ↓ = Magma.' },
+      { q:'2. It comes <strong>out</strong> of the volcano.', ans:'Lava', hint:'Out ↑ = Lava.' },
+      { q:'3. It flows down the side of the volcano.', ans:'Lava', hint:'Flowing down the outside means it is out ↑.' },
+      { q:'4. It is in a big chamber deep under the volcano.', ans:'Magma', hint:'Deep under the volcano = under ↓.' }
+    ];
+    const st = exState[ex.id];
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      <div class="big-picture" style="margin-bottom:14px;">
+        <span>⬇️ <strong>Magma</strong> = ${lang==='es'?'debajo':'under'}</span>
+        <span>⬆️ <strong>Lava</strong> = ${lang==='es'?'fuera':'out'}</span>
+      </div>
+      ${qs.map((it, idx) => `
+        <div class="choice-row">
+          <div>${it.q} <button class="speak-btn" style="padding:2px 8px;font-size:0.75rem;" onclick="speak('${stripHtml(it.q).replace(/'/g,"\\'")}')">🔊</button></div>
+          <div class="choice-btns">
+            ${['Magma','Lava'].map(op => `
+              <button class="opt-btn ${st.answers[idx]===op?'correct':''}" onclick="ansMagma(${idx}, '${op}')">${op}</button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+      <div style="margin-top:14px;">
+        ${st.done && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+    window.ansMagma = (idx, op) => {
+      if (op === qs[idx].ans) {
+        st.answers[idx] = op; playTone('ok');
+        if (st.answers.every((v, i) => v === qs[i].ans)) {
+          st.done = true; markExDone(ex.id); renderExercises(); showFeedback(true, t.allCorrect);
+        } else renderCurrentExercise(EXERCISES[currentExIdx]);
+      } else {
+        playTone('err');
+        showFeedback(false, `${t.retryHint} ${qs[idx].hint}`);
+      }
+    };
+  }
+
+  /* --- EX 9: SORT WORDS INTO GROUPS --- */
+  else if (ex.type === 'sort_9') {
+    const title = lang==='es' ? '9. Clasifica las palabras en grupos' : '9. Sort the words into groups';
+    const items = lang==='es' ? [
+      { w:'Corteza', g:'layers' }, { w:'Cráter', g:'volcanoes' }, { w:'Límite', g:'plates' },
+      { w:'Manto', g:'layers' }, { w:'Lava', g:'volcanoes' }, { w:'Fosa oceánica', g:'plates' },
+      { w:'Núcleo', g:'layers' }, { w:'Ceniza', g:'volcanoes' }, { w:'Placa tectónica', g:'plates' }
+    ] : [
+      { w:'Crust', g:'layers' }, { w:'Crater', g:'volcanoes' }, { w:'Boundary', g:'plates' },
+      { w:'Mantle', g:'layers' }, { w:'Lava', g:'volcanoes' }, { w:'Ocean trench', g:'plates' },
+      { w:'Core', g:'layers' }, { w:'Ash', g:'volcanoes' }, { w:'Tectonic plate', g:'plates' }
+    ];
+    const groupNames = lang==='es'
+      ? { layers:'Capas de la Tierra', volcanoes:'Volcanes', plates:'Tectónica de placas' }
+      : { layers:'Earth’s layers', volcanoes:'Volcanoes', plates:'Plate tectonics' };
+    const st = exState[ex.id];
+    const placedSet = new Set([...st.groups.layers, ...st.groups.volcanoes, ...st.groups.plates]);
+
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      <p style="margin-top:0;color:var(--text-muted);">${lang==='es'?'Toca una palabra del banco y luego toca su caja correspondiente.':'Tap a word from the bank, then tap the matching group box.'}</p>
+      <div class="word-bank">
+        ${items.map((it, idx) => `
+          <button class="chip ${st.selectedWord===idx?'selected':''} ${placedSet.has(it.w)?'used':''}"
+            onclick="pickSortWord(${idx})">${it.w}</button>
+        `).join('')}
+      </div>
+      <div class="sort-cols">
+        <div class="sort-box" onclick="dropSortGroup('layers')">
+          <div class="svg-box" style="width:54px;height:54px;margin:0 auto;">${SVGS.geosphere}</div>
+          <h4>${groupNames.layers}</h4>
+          <div>${st.groups.layers.map(w=>`<span class="sorted-pill">${w}</span>`).join('')}</div>
+        </div>
+        <div class="sort-box" onclick="dropSortGroup('volcanoes')">
+          <div class="svg-box" style="width:54px;height:54px;margin:0 auto;">${SVGS.volcano}</div>
+          <h4>${groupNames.volcanoes}</h4>
+          <div>${st.groups.volcanoes.map(w=>`<span class="sorted-pill">${w}</span>`).join('')}</div>
+        </div>
+        <div class="sort-box" onclick="dropSortGroup('plates')">
+          <div class="svg-box" style="width:54px;height:54px;margin:0 auto;">${SVGS.plate_tectonics}</div>
+          <h4>${groupNames.plates}</h4>
+          <div>${st.groups.plates.map(w=>`<span class="sorted-pill">${w}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        ${st.done && currentExIdx < EXERCISES.length-1 ? `<button class="big-action-btn" onclick="goExercise(${currentExIdx+1})">${t.nextExBtn}</button>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+
+    window.pickSortWord = (idx) => {
+      st.selectedWord = idx;
+      renderCurrentExercise(EXERCISES[currentExIdx]);
+    };
+
+    window.dropSortGroup = (grp) => {
+      if (st.selectedWord === null) {
+        showFeedback(false, t.selectGroupHint);
+        return;
+      }
+      const item = items[st.selectedWord];
+      if (item.g === grp) {
+        st.groups[grp].push(item.w);
+        st.selectedWord = null;
+        playTone('ok');
+        if (placedSet.size + 1 === items.length) {
+          st.done = true; markExDone(ex.id); renderExercises(); showFeedback(true, t.allCorrect);
+        } else renderCurrentExercise(EXERCISES[currentExIdx]);
+      } else {
+        playTone('err');
+        showFeedback(false, `${t.retryHint} <strong>"${item.w}"</strong> → ${groupNames[item.g]}.`);
+      }
+    };
+  }
+
+  /* --- EX 10: TRUE OR FALSE --- */
+  else if (ex.type === 'tf_10') {
+    const title = lang==='es' ? '10. ¿Verdadero o falso?' : '10. True or false?';
+    const lblT = lang==='es' ? 'V (Verdadero)' : 'T (True)';
+    const lblF = lang==='es' ? 'F (Falso)' : 'F (False)';
+    const qs = lang==='es' ? [
+      { q:'1. El <strong>núcleo</strong> es la parte más fría de la Tierra.', svg:SVGS.core, ans:'F', hint:'¡Al contrario! El núcleo es la parte MÁS CALIENTE.' },
+      { q:'2. Las placas tectónicas se mueven <strong>muy despacio</strong>.', svg:SVGS.move_slowly, ans:'T', hint:'Recuerda el caracol: se mueven muy despacio.' },
+      { q:'3. La <strong>hidrosfera</strong> es toda el agua de la Tierra.', svg:SVGS.hydrosphere, ans:'T', hint:'Hidro = agua (océanos, ríos y lagos).' },
+      { q:'4. El <strong>cráter</strong> está en la parte de abajo del volcán.', svg:SVGS.crater, ans:'F', hint:'El cráter es la boca de ARRIBA del volcán.' },
+      { q:'5. Los <strong>recursos naturales</strong> vienen de la naturaleza.', svg:SVGS.natural_resources, ans:'T', hint:'Agua, madera y rocas vienen de la naturaleza.' }
+    ] : [
+      { q:'1. The <strong>core</strong> is the coldest part of Earth.', svg:SVGS.core, ans:'F', hint:'Quite the opposite! The core is the HOTTEST part.' },
+      { q:'2. Tectonic plates move <strong>very slowly</strong>.', svg:SVGS.move_slowly, ans:'T', hint:'Remember the snail: they move very slowly.' },
+      { q:'3. The <strong>hydrosphere</strong> is all the water on Earth.', svg:SVGS.hydrosphere, ans:'T', hint:'Hydro = water (oceans, rivers and lakes).' },
+      { q:'4. The <strong>crater</strong> is at the bottom of a volcano.', svg:SVGS.crater, ans:'F', hint:'The crater is the opening at the TOP of a volcano.' },
+      { q:'5. <strong>Natural resources</strong> come from nature.', svg:SVGS.natural_resources, ans:'T', hint:'Water, wood and rocks come from nature.' }
+    ];
+    const st = exState[ex.id];
+    stage.innerHTML = `
+      <div class="ex-header">
+        <h3 class="ex-title">${title}</h3>
+        <button class="speak-btn" onclick="speak('${title}')">🔊 ${t.listen}</button>
+      </div>
+      ${qs.map((it, idx) => `
+        <div class="choice-row">
+          <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:220px;">
+            <div class="svg-box" style="width:54px;height:54px;">${it.svg}</div>
+            <span>${it.q}</span>
+            <button class="speak-btn" style="padding:2px 8px;font-size:0.75rem;" onclick="speak('${stripHtml(it.q).replace(/'/g,"\\'")}')">🔊</button>
+          </div>
+          <div class="choice-btns">
+            <button class="opt-btn ${st.answers[idx]==='T'?'correct':''}" onclick="ansTF(${idx}, 'T')">${lblT}</button>
+            <button class="opt-btn ${st.answers[idx]==='F'?'correct':''}" onclick="ansTF(${idx}, 'F')">${lblF}</button>
+          </div>
+        </div>
+      `).join('')}
+      <div style="margin-top:14px;">
+        ${st.done ? `<div class="big-picture" style="background:var(--success-bg);border-color:var(--success);color:var(--success);">🎉 <strong>${lang==='es'?'¡Enhorabuena! Has terminado todas las actividades de la unidad.':'Congratulations! You finished all activities in this unit.'}</strong></div>` : ''}
+      </div>
+      <div id="ex-feedback" class="feedback-box"></div>
+    `;
+
+    window.ansTF = (idx, val) => {
+      if (val === qs[idx].ans) {
+        st.answers[idx] = val; playTone('ok');
+        if (st.answers.every((v, i) => v === qs[i].ans)) {
+          st.done = true; markExDone(ex.id); renderExercises(); showFeedback(true, t.allCorrect);
+        } else renderCurrentExercise(EXERCISES[currentExIdx]);
+      } else {
+        playTone('err');
+        showFeedback(false, `${t.retryHint} ${qs[idx].hint}`);
+      }
+    };
+  }
+}
+
+/* =========================================================
+   RENDER ORCHESTRATION & INIT
+   ========================================================= */
+function renderAll() {
+  renderBlockPills();
+  if (activeTab === 'learn') renderLearn();
+  else if (activeTab === 'oral') renderOral();
+  else renderExercises();
+}
+
+updateStaticUI();
+renderAll();
+</script>
+</body>
+</html>
+```
